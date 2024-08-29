@@ -35,7 +35,7 @@ See the [installation guide](https://technic960183.github.io/pycorrelator/instal
 Before you start, please check out our documentation for a
 [quick start](https://technic960183.github.io/pycorrelator/index.html#quickstart).
 
-- To perform a **cross-matching** between two catalogs, check this
+- To perform **cross-matching** between two catalogs, check this
   [cross-matching example](https://technic960183.github.io/pycorrelator/tutorial/xmatch.html).
 - To **cluster** the objects in a catalog with the Friends-of-Friends (FoF) algorithm, check this
   [clustering example](https://technic960183.github.io/pycorrelator/tutorial/fof.html).
