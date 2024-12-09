@@ -12,4 +12,4 @@ please refer to the `API Reference <../ref/index.html>`_ or the `Tutorials <../t
 .. toctree::
    :maxdepth: 2
 
-   pycorrelator
+   spherimatch

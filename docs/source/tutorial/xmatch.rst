@@ -20,11 +20,11 @@ First, let's create two mock catalogs A and B:
 xmatch()
 --------
 
-Then, we can perform the cross-matching with the tolerance of 0.01 degree using the :func:`pycorrelator.xmatch` function.
+Then, we can perform the cross-matching with the tolerance of 0.01 degree using the :func:`spherimatch.xmatch` function.
 
 .. code-block:: python
     
-    from pycorrelator import xmatch
+    from spherimatch import xmatch
     result_object = xmatch(catalogA, catalogB, tolerance=0.01)
 
 The result object contains the matching results. Three methods are available to get the results in different formats:
@@ -32,7 +32,7 @@ The result object contains the matching results. Three methods are available to 
 get_dataframe1()
 ----------------
 
-To get the matching results of catalog A, use the :func:`pycorrelator.XMatchResult.get_dataframe1` method:
+To get the matching results of catalog A, use the :func:`spherimatch.XMatchResult.get_dataframe1` method:
 
 .. code-block:: python
 
@@ -59,7 +59,7 @@ Expected output::
     1  120.689 -41.269        1
     2   10.689 -41.269        3
 
-The method :func:`pycorrelator.XMatchResult.get_dataframe1` returns a pandas DataFrame object.
+The method :func:`spherimatch.XMatchResult.get_dataframe1` returns a pandas DataFrame object.
 So if you want to find the objects in catalog A that are not in catalog B, you can do the following
 `pandas DataFrame operation <https://pandas.pydata.org/docs/user_guide/10min.html#boolean-indexing>`_:
 
@@ -76,8 +76,8 @@ Expected output::
 get_dataframe2()
 ----------------
 
-Similarly, to get the matching results of catalog B, use the :func:`pycorrelator.XMatchResult.get_dataframe2` method.
-The usage is the same as :func:`pycorrelator.XMatchResult.get_dataframe1`. Just instead of giving the matching results
+Similarly, to get the matching results of catalog B, use the :func:`spherimatch.XMatchResult.get_dataframe2` method.
+The usage is the same as :func:`spherimatch.XMatchResult.get_dataframe1`. Just instead of giving the matching results
 of each object in catalog A, it gives the matching results of each object in catalog B.
 
 .. code-block:: python
@@ -96,7 +96,7 @@ get_serial_dataframe()
 ----------------------
 
 If you want to get the matching results of both catalogs in a single DataFrame, you can use the
-:func:`pycorrelator.XMatchResult.get_serial_dataframe` method. For example:
+:func:`spherimatch.XMatchResult.get_serial_dataframe` method. For example:
 
 .. code-block:: python
 

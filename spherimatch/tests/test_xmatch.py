@@ -6,8 +6,8 @@ from collections import defaultdict
 import unittest
 import numpy as np
 import pandas as pd
-from pycorrelator import point_offset, generate_random_point
-from pycorrelator import xmatch
+from spherimatch import point_offset, generate_random_point
+from spherimatch import xmatch
 from test_fof import generate_celestial_grid
 
 

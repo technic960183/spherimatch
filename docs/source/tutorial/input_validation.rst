@@ -1,8 +1,8 @@
-What kind of input format does pycorrelator support?
+What kind of input format does spherimatch support?
 ====================================================
 
 
-Currently, all of the :doc:`functions <../ref/index>` in pycorrelator support the following input format only:
+Currently, all of the :doc:`functions <../ref/index>` in spherimatch support the following input format only:
 
    - pandas.DataFrame
    - numpy.ndarray

@@ -2,7 +2,7 @@ Example: Clustering using FoF algorithm
 =======================================
 
 A friend of friends (FoF) algorithm is useful when you want to find groups of objects that are close
-to each other forming clusters. Here is an example of how to perform clustering using the **pycorrelator** package.
+to each other forming clusters. Here is an example of how to perform clustering using the **spherimatch** package.
 
 First, let's create a mock catalog:
 
@@ -24,11 +24,11 @@ fof()
 -------------------
 
 Then, we can perform clustering using the FoF algorithm with the tolerance of 0.01 degree using the
-:func:`pycorrelator.fof` function.
+:func:`spherimatch.fof` function.
 
 .. code-block:: python
 
-    from pycorrelator import fof
+    from spherimatch import fof
     result_object = fof(catalog, tolerance=0.01)
 
 The result object contains the clustering results. Four methods are available to get the results in different formats:
@@ -37,7 +37,7 @@ get_group_dataframe()
 ---------------------
 
 To get the clustering results with the appendind data (``'mag'`` in this case), use the
-:func:`pycorrelator.FoFResult.get_group_dataframe` method:
+:func:`spherimatch.FoFResult.get_group_dataframe` method:
 
 .. code-block:: python
 
@@ -120,7 +120,7 @@ Expected output::
 get_group_sizes()
 -----------------
 
-To get the size of each group in the order of the group index, use the :func:`pycorrelator.FoFResult.get_group_sizes` method:
+To get the size of each group in the order of the group index, use the :func:`spherimatch.FoFResult.get_group_sizes` method:
 
 .. code-block:: python
 
@@ -133,7 +133,7 @@ Expected output::
 get_coordinates()
 -----------------
 
-To get the coordinates of the objects in each group, use the :func:`pycorrelator.FoFResult.get_coordinates` method:
+To get the coordinates of the objects in each group, use the :func:`spherimatch.FoFResult.get_coordinates` method:
 
 .. code-block:: python
 
@@ -148,7 +148,7 @@ Expected output::
 get_group_coordinates()
 -----------------------
 
-To get the center coordinates of each group, use the :func:`pycorrelator.FoFResult.get_group_coordinates` method:
+To get the center coordinates of each group, use the :func:`spherimatch.FoFResult.get_group_coordinates` method:
 
 .. code-block:: python
 

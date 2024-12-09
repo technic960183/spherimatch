@@ -1,12 +1,12 @@
-.. pycorrelator documentation master file, created by
+.. spherimatch documentation master file, created by
    sphinx-quickstart on Sat Jun 15 21:23:18 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pycorrelator's documentation!
+Welcome to spherimatch's documentation!
 ========================================
 
-**pycorrelator** is a Python package designed to perform cross correlation and self correlation analyses in spherical coordinates.
+**spherimatch** is a Python package designed to perform cross-matching and self-matching in spherical coordinates.
 This is particularly useful in fields such as astrophysics, geophysics, and any domain where objects are naturally distributed on a spherical surface.
 Currently, this package only support astrophysics coordinates (Ra, Dec) in degrees. More units and naming convention will be supported in the future.
 
@@ -40,7 +40,7 @@ Contents
 .. note::
 
    This project is under active development. If you find any issue, please report it at
-   the GitHub repository's `issue tracker <https://github.com/technic960183/pycorrelator/issues>`_.
+   the GitHub repository's `issue tracker <https://github.com/technic960183/spherimatch/issues>`_.
 
 Indices and tables
 ==================

@@ -1,4 +1,4 @@
-pycorrelator package
+spherimatch package
 ====================
 
 Tests
@@ -7,92 +7,92 @@ Tests
 .. toctree::
    :maxdepth: 2
 
-   pycorrelator.tests
+   spherimatch.tests
 
-pycorrelator.catalog module
+spherimatch.catalog module
 ---------------------------
 
-.. automodule:: pycorrelator.catalog
+.. automodule:: spherimatch.catalog
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.chunk module
+spherimatch.chunk module
 -------------------------
 
-.. automodule:: pycorrelator.chunk
+.. automodule:: spherimatch.chunk
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.chunk\_generator module
+spherimatch.chunk\_generator module
 ------------------------------------
 
-.. automodule:: pycorrelator.chunk_generator
+.. automodule:: spherimatch.chunk_generator
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.chunk\_generator\_grid module
+spherimatch.chunk\_generator\_grid module
 ------------------------------------------
 
-.. automodule:: pycorrelator.chunk_generator_grid
+.. automodule:: spherimatch.chunk_generator_grid
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.disjoint\_set module
+spherimatch.disjoint\_set module
 ---------------------------------
 
-.. automodule:: pycorrelator.disjoint_set
+.. automodule:: spherimatch.disjoint_set
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.euclidean\_vs\_angular\_distance\_local module
+spherimatch.euclidean\_vs\_angular\_distance\_local module
 -----------------------------------------------------------
 
-.. automodule:: pycorrelator.euclidean_vs_angular_distance_local
+.. automodule:: spherimatch.euclidean_vs_angular_distance_local
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.fof module
+spherimatch.fof module
 ------------------------------
 
-.. automodule:: pycorrelator.fof
+.. automodule:: spherimatch.fof
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.result\_fof module
+spherimatch.result\_fof module
 -------------------------------
 
-.. automodule:: pycorrelator.result_fof
+.. automodule:: spherimatch.result_fof
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.result\_xmatch module
+spherimatch.result\_xmatch module
 ----------------------------------
 
-.. automodule:: pycorrelator.result_xmatch
+.. automodule:: spherimatch.result_xmatch
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.utilities\_spherical module
+spherimatch.utilities\_spherical module
 ----------------------------------------
 
-.. automodule:: pycorrelator.utilities_spherical
+.. automodule:: spherimatch.utilities_spherical
    :members:
    :undoc-members:
    :show-inheritance:
 
-pycorrelator.xmatch module
+spherimatch.xmatch module
 --------------------------
 
-.. automodule:: pycorrelator.xmatch
+.. automodule:: spherimatch.xmatch
    :members:
    :undoc-members:
    :show-inheritance:
@@ -100,7 +100,7 @@ pycorrelator.xmatch module
 Module contents
 ---------------
 
-.. automodule:: pycorrelator
+.. automodule:: spherimatch
    :members:
    :undoc-members:
    :show-inheritance:
