@@ -1,7 +1,7 @@
 Tutorials
 =========
 
-This section contains tutorials on how to use the **pycorrelator** package.
+This section contains tutorials on how to use the **spherimatch** package.
 
 .. toctree::
 

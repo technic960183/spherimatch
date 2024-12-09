@@ -5,9 +5,9 @@ xmatch functionality
 --------------------------
 
 .. _xmatch-ref:
-.. autofunction:: pycorrelator.xmatch
+.. autofunction:: spherimatch.xmatch
 
-.. autoclass:: pycorrelator.XMatchResult
+.. autoclass:: spherimatch.XMatchResult
    :members:
    :undoc-members:
 
@@ -15,8 +15,8 @@ fof functionality
 ------------------------------
 
 .. _fof-ref:
-.. autofunction:: pycorrelator.fof
+.. autofunction:: spherimatch.fof
 
-.. autoclass:: pycorrelator.FoFResult
+.. autoclass:: spherimatch.FoFResult
    :members:
    :undoc-members:

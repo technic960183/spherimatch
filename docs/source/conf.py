@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'pycorrelator'
+project = 'spherimatch'
 copyright = '2024, Yuan-Ming Hsu'
 author = 'Yuan-Ming Hsu'
 release = 'v0.0'

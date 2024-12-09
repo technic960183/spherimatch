@@ -3,7 +3,7 @@ Example: Duplicates removal
 
 One common usage of the FoF algorithm is to remove duplicates from a catalog.
 In this example, we will show how to remove duplicates from a catalog using the
-:func:`pycorrelator.fof` function.
+:func:`spherimatch.fof` function.
 
 First, let's create a mock catalog with duplicates:
 
@@ -28,7 +28,7 @@ Here is how we can do it:
     ranking_col = 'exp_time'
     tolerance = 0.01
 
-    from pycorrelator import fof
+    from spherimatch import fof
     result_object = fof(catalog, tolerance=tolerance)
     catalog = result_object.get_group_dataframe()
 
