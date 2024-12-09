@@ -5,13 +5,13 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 import unittest
 import numpy as np
 import pandas as pd
-from pycorrelator import ChunkGeneratorByGrid
-from pycorrelator import ChunkGeneratorByDenseGrid, ChunkGeneratorBySuperDenseGrid
-from pycorrelator import GridChunkGenerator
-from pycorrelator import DisjointSet
-from pycorrelator.catalog import Catalog
-from pycorrelator.result_fof import FoFResult 
-from pycorrelator.fof import group_by_quadtree_chunk
+from spherimatch import ChunkGeneratorByGrid
+from spherimatch import ChunkGeneratorByDenseGrid, ChunkGeneratorBySuperDenseGrid
+from spherimatch import GridChunkGenerator
+from spherimatch import DisjointSet
+from spherimatch.catalog import Catalog
+from spherimatch.result_fof import FoFResult 
+from spherimatch.fof import group_by_quadtree_chunk
 
 
 class TestChunkGeneratorByGrid_coor2id_central(unittest.TestCase):

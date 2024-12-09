@@ -6,8 +6,8 @@ import unittest
 import numpy as np
 import pandas as pd
 from numpy.typing import NDArray
-from pycorrelator import xmatch
-from pycorrelator.catalog import Catalog
+from spherimatch import xmatch
+from spherimatch.catalog import Catalog
 
 class TestXMatchResult_Methods(unittest.TestCase):
 
