@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "spherimatch"
+dynamic = ["version"]
+dependencies = [
+  "numpy",
+  "scipy",
+  "pandas",
+]
+requires-python = ">=3.9"
+authors = [
+  {name = "Yuan-Ming Hsu"}
+]
+description = "Cross-Matching and Self-Matching in Spherical Coordinates."
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+keywords = ["cross-matching", "spherical", "astronomy"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage = "https://github.com/technic960183/spherimatch/"
+Documentation = "https://technic960183.github.io/spherimatch/"
+Repository = "https://github.com/technic960183/spherimatch.git"
+"Bug Tracker" = "https://github.com/technic960183/spherimatch/issues"
+
+[project.optional-dependencies]
+dev = [
+  "build",
+  "sphinx",
+  "sphinx_rtd_theme",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/docs",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["spherimatch/"]
+
+[tool.hatch.version]
+path = "spherimatch/__init__.py"
