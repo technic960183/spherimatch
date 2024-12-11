@@ -46,7 +46,7 @@ def fof(catalog, tolerance) -> FoFResult:
     cg.set_symmetric_ring_chunk(dec_bound, ring_chunk)
     cg.distribute(_catalog)
     
-    print(f"Using a single process to group {len(cg.chunks)} chunks.")
+    # print(f"Using a single process to group {len(cg.chunks)} chunks.")
     ds = DisjointSet(len(_catalog))
     for chunk in cg.chunks:
         groups_index = group_by_quadtree_chunk((chunk, tolerance))

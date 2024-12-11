@@ -50,7 +50,7 @@ def unique_merge_defaultdicts(d1: defaultdict, d2: defaultdict):
     result = defaultdict(list, {k: list(v) for k, v in zip(all_keys, all_values)})
     return result
 
-def xmatch(catalog1, catalog2, tolerance, verbose=True) -> XMatchResult:
+def xmatch(catalog1, catalog2, tolerance, verbose=False) -> XMatchResult:
     """Performs a cross-match between two catalogs.
 
     This function matches objects from two different catalogs based on their coordinates. Objects from
