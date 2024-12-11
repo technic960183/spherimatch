@@ -13,3 +13,19 @@ please refer to the `API Reference <../ref/index.html>`_ or the `Tutorials <../t
    :maxdepth: 2
 
    spherimatch
+
+To develop the project, clone the repository and install the project in editable mode.
+
+.. code-block:: console
+   
+   $ git clone https://github.com/technic960183/spherimatch.git
+   $ cd spherimatch
+   $ pip install -e .[dev]
+
+To test the project, run the following command.
+
+.. code-block:: console
+
+   $ python -m unittest
+
+You should see ``OK (skipped=3)`` if all tests pass.
