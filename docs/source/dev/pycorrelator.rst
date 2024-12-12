@@ -1,14 +1,6 @@
 spherimatch package
 ====================
 
-Tests
------------
-
-.. toctree::
-   :maxdepth: 2
-
-   spherimatch.tests
-
 spherimatch.catalog module
 ---------------------------
 

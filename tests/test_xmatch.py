@@ -1,14 +1,10 @@
-import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
 from collections import defaultdict
 import unittest
 import numpy as np
 import pandas as pd
 from spherimatch import point_offset, generate_random_point
 from spherimatch import xmatch
-from test_fof import generate_celestial_grid
+from .test_fof import generate_celestial_grid
 
 
 def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_radius=(0, 1)):
