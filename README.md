@@ -21,14 +21,10 @@ Currently, this package only support astrophysics coordinates `(Ra, Dec)` in deg
 - Easy integration with existing data processing packages, such as `pandas`.
 
 ## Installation
-You can install `spherimatch` by cloning the codes:
+Install `spherimatch` by:
 ```bash
-git clone https://github.com/technic960183/spherimatch.git
+pip install spherimatch
 ```
-
-pip install will be supported in the future.
-
-Remember to set the environment variable `PYTHONPATH` (`sys.path`) to the directory where `spherimatch` is located.
 See the [installation guide](https://technic960183.github.io/spherimatch/install.html) for more details.
 
 ## Example Usage
