@@ -1,4 +1,5 @@
 from collections import Counter, defaultdict
+from typing import Optional
 import numpy as np
 import pandas as pd
 from .catalog import Catalog
@@ -11,7 +12,7 @@ class XMatchResult:
         self.cat2 = cat2
         self.tolerance = tolerance
         self.result_dict = result_dict
-        self.result_dict_reserve = None
+        self.result_dict_reserve: Optional[defaultdict] = None
 
     def __str__(self):
         return f"XMatchResult of cat1 with {len(self.cat1)} objects and cat2 with {len(self.cat2)} objects."
@@ -136,9 +137,9 @@ class XMatchResult:
         if len(idx_combine) == 0:
             return pd.DataFrame(columns=coord_columns)
         idx_combine = np.array(idx_combine, dtype=np.int64)
-        is_df1 = np.array(is_df1)
+        is_df1_np = np.array(is_df1)
         n1 = len(self.cat1)
-        idx_combine[~is_df1] += n1
+        idx_combine[~is_df1_np] += n1
         idxes_array1 = self.cat1.get_indexes()
         idxes_array2 = self.cat2.get_indexes()
         df1 = pd.DataFrame(self.cat1.get_coordiantes(), columns=coord_columns, index=idxes_array1)
@@ -158,7 +159,7 @@ class XMatchResult:
             if non_existent_columns:
                 raise KeyError(f"Columns {non_existent_columns} are not in the input DataFrame")
         data_df.insert(2, 'N_match', n_match)
-        data_df.insert(3, 'is_cat1', is_df1)
+        data_df.insert(3, 'is_cat1', is_df1_np)
         return data_df
 
     def number_distribution(self) -> Counter:

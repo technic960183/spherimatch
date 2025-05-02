@@ -5,7 +5,7 @@ from numpy.typing import NDArray
 
 class ChunkGenerator:
 
-    def __init__(self, margin):
+    def __init__(self, margin: float) -> None:
         '''Initialize the chunk generator.
         '''
         self.chunks: list[Chunk] = []

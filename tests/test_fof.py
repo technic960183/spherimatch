@@ -55,7 +55,7 @@ def generate_celestial_grid(**kwargs) -> list[tuple[float, float]]:
 
 
 def create_groups_from_grid(grid: list[tuple[float, float]],
-                            tolerance=1, seed=None, fraction=0.5,
+                            tolerance=1., seed=None, fraction=0.5,
                             ring_radius=(0, 1)) -> tuple[list[list[tuple[float, float]]], NDArray]:
     """
     Randomly pick half of the grid points and create groups around them.

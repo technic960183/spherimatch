@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Any, Optional
 import numpy as np
 import pandas as pd
 from numpy.typing import NDArray
@@ -18,7 +18,7 @@ class Catalog:
           possible combinations with 'ra', 'dec'; 'RA', 'DEC').
     '''
 
-    def __init__(self, data):
+    def __init__(self, data: Any) -> None:
         self.datatype = type(data)
         self.input_data = data
         self.ra = None  # ra, longitude, azimuth
