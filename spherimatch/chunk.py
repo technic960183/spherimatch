@@ -6,7 +6,7 @@ class Chunk:
 
     def __init__(self, chunk_id, ra, dec, discription=None):
         self.chunk_id = chunk_id
-        self.discription = discription if discription != None else f"Chunk {chunk_id} ({ra:3f}, {dec:3f})"
+        self.discription = discription if discription is not None else f"Chunk {chunk_id} ({ra:3f}, {dec:3f})"
         self.central_data = np.empty((0, 2), dtype=np.float64)
         self.boundary_data = np.empty((0, 2), dtype=np.float64)
         self.central_index = np.empty((0), dtype=np.int64)
@@ -33,7 +33,7 @@ class Chunk:
         return self.chunk_ra, self.chunk_dec
 
     def farest_distance(self, distance=None):
-        if distance == None:
+        if distance is None:
             return self.max_size
         self.max_size = distance
 

@@ -25,15 +25,15 @@ class Catalog:
         self.dec = None  # dec, latitude, alltitude
         self.ra_column: Optional[str] = None
         self.dec_column: Optional[str] = None
-        if self.datatype == np.ndarray:
+        if isinstance(self.input_data, np.ndarray):
             self.__type_np_array()
-        elif self.datatype == pd.DataFrame:
+        elif isinstance(self.input_data, pd.DataFrame):
             self.__type_pd_dataframe()
-        elif self.datatype == tuple:
+        elif isinstance(self.input_data, tuple):
             raise NotImplementedError()  # [TODO] Support tuple input for Catalog
-        elif self.datatype == list:
+        elif isinstance(self.input_data, list):
             raise NotImplementedError()  # [TODO] Support list input for Catalog
-        elif self.datatype == dict:
+        elif isinstance(self.input_data, dict):
             raise NotImplementedError()  # [TODO] Support dict input for Catalog
         else:
             raise TypeError("The input data must be either a numpy array or a pandas dataframe!")
@@ -91,7 +91,7 @@ class Catalog:
         pandas.DataFrame
             The dataframe of the appending data.
         '''
-        if self.datatype != pd.DataFrame:
+        if not isinstance(self.input_data, pd.DataFrame):
             return pd.DataFrame(index=self.get_indexes())
         columns = []
         if retain_all_columns:
