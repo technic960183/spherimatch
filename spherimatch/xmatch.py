@@ -14,8 +14,8 @@ from .utilities_spherical import distances_to_target
 def unique_merge_defaultdicts(d1: defaultdict, d2: defaultdict):
     """Joins two dictionaries, merging values for shared keys and preserving others.
 
-    When both dictionaries have the same key, this function makes a new list 
-    with every distinct value from either dictionary. If a key is only in one 
+    When both dictionaries have the same key, this function makes a new list
+    with every distinct value from either dictionary. If a key is only in one
     dictionary, it adds that key and its values directly to the result.
 
     Parameters
@@ -50,6 +50,7 @@ def unique_merge_defaultdicts(d1: defaultdict, d2: defaultdict):
     result = defaultdict(list, {k: list(v) for k, v in zip(all_keys, all_values)})
     return result
 
+
 def xmatch(catalog1, catalog2, tolerance, verbose=False) -> XMatchResult:
     """Performs a cross-match between two catalogs.
 
@@ -83,7 +84,7 @@ def xmatch(catalog1, catalog2, tolerance, verbose=False) -> XMatchResult:
     cg2.distribute(_catalog2)
     if len(cg1.chunks) != len(cg2.chunks):
         raise BrokenPipeError("The two catalogs have different number of chunks! Please contact the developer.")
-    merged_dict = defaultdict(list) # [FIXME] Change to dict or sorted dict, or don't assume the order of the keys.
+    merged_dict = defaultdict(list)  # [FIXME] Change to dict or sorted dict, or don't assume the order of the keys.
     for i in range(len(cg1.chunks)):
         if verbose:
             print(f"Started Chunk {i}")
@@ -94,6 +95,7 @@ def xmatch(catalog1, catalog2, tolerance, verbose=False) -> XMatchResult:
             merged_dict = unique_merge_defaultdicts(merged_dict, dd)
     return XMatchResult(_catalog1, _catalog2, tolerance, merged_dict)
 
+
 def rotate_to_center(object_coor, chunk_ra, chunk_dec):
     # Rotate the center of the chunk to (180, 0) of the celestial sphere
     center_car = radec_to_cartesian(chunk_ra, chunk_dec)
@@ -101,8 +103,9 @@ def rotate_to_center(object_coor, chunk_ra, chunk_dec):
     normal_car /= np.linalg.norm(normal_car)
     normal_ra, normal_dec = cartesian_to_radec(normal_car)
     angle = great_circle_distance(chunk_ra, chunk_dec, 180, 0)
-    rot_ra, rot_dec = rotate_radec_about_axis(object_coor[:,0], object_coor[:,1], normal_ra, normal_dec, angle)
+    rot_ra, rot_dec = rotate_radec_about_axis(object_coor[:, 0], object_coor[:, 1], normal_ra, normal_dec, angle)
     return rot_ra, rot_dec
+
 
 def xmatch_chunk(args: tuple[Chunk, Chunk, float]):
     chunk1, chunk2, tolerance = args
@@ -123,10 +126,11 @@ def xmatch_chunk(args: tuple[Chunk, Chunk, float]):
         dd[key] = value
     return dd
 
+
 def spherical_xmatching(idx1: np.array, coor1: np.array, idx2: np.array, coor2: np.array, tolerance, A2E_factor):
     qt1 = KDTree(coor1)
     qt2 = KDTree(coor2)
-    list_of_indexes = qt1.query_ball_tree(qt2, tolerance * A2E_factor) # list of elements in idx2
+    list_of_indexes = qt1.query_ball_tree(qt2, tolerance * A2E_factor)  # list of elements in idx2
     keys, vals = [], []
     for i, indexes in enumerate(list_of_indexes):
         distance = distances_to_target(coor1[i, :], coor2[indexes, :])

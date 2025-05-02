@@ -23,7 +23,7 @@ class GridChunkConfig:
 
         Note
         ----
-            Specify either the width for ring chunks or the dec_bound for polar chunks. 
+            Specify either the width for ring chunks or the dec_bound for polar chunks.
         '''
         self.margin = margin
         if dec_bound is not None and width is not None:
@@ -116,7 +116,8 @@ class GridChunkGenerator(ChunkGenerator):
         # Ring chunks
         for i, config in enumerate(self.config_ring):
             ra_diff = np.abs(ra - config['center_ra'])
-            ra_diff = np.minimum(ra_diff, 360 - ra_diff) # Not necessary. The central parts don't cross the 0-360 boundary.
+            # The line below should make no difference, because the central parts don't cross the 0-360 boundary.
+            ra_diff = np.minimum(ra_diff, 360 - ra_diff)
             dec_diff = np.abs(dec - config['center_dec'])
             mask_ra = (ra_diff <= config['delta_ra'])
             mask_dec = (dec_diff <= config['delta_dec'])
@@ -142,7 +143,8 @@ class GridChunkGenerator(ChunkGenerator):
         # Middle chunks
         for config in self.config_ring:
             ra_diff = np.abs(ra - config['center_ra'])
-            ra_diff = np.minimum(ra_diff, 360 - ra_diff) # Necessary. The boundary parts DO cross the 0-360 boundary.
+            # Necessary. The boundary parts DO cross the 0-360 boundary.
+            ra_diff = np.minimum(ra_diff, 360 - ra_diff)
             dec_diff = np.abs(dec - config['center_dec'])
             mask_ra = (ra_diff >= config['delta_ra']) & (ra_diff <= config['delta_ra'] + margin) & (
                 dec_diff <= config['delta_dec'] + margin)

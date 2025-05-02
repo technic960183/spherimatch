@@ -46,10 +46,10 @@ def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_r
     i_cat2 = 0
     for i, point in enumerate(selected_points):
         centrals.append(point)
-        idxes = [] # List of indexes of the surrounding points
+        idxes = []  # List of indexes of the surrounding points
         for _ in range(np.random.randint(5, 10)):  # Randomly create 1 to 4 additional points
             theta = np.random.uniform(0, 360)  # Random direction
-            distance = np.random.uniform(tolerance*ring_radius[0], tolerance*ring_radius[1]) # Random distance
+            distance = np.random.uniform(tolerance*ring_radius[0], tolerance*ring_radius[1])  # Random distance
             offset_point = point_offset(point, distance, theta)
             neighbors.append(offset_point)
             idxes.append(i_cat2)
@@ -66,15 +66,15 @@ def check_Xmatching(expected_matches: dict, output_matches: defaultdict):
     if the matching process has been conducted correctly.
 
     Parameters:
-    - expected_matches (dict): A dictionary where keys are central points and values are lists of expected 
+    - expected_matches (dict): A dictionary where keys are central points and values are lists of expected
                                neighboring points that should match with the central point.
-    - output_matches (defaultdict): A defaultdict similar in structure to expected_matches, but contains 
-                                    the actual neighboring points matched with each central point by the 
+    - output_matches (defaultdict): A defaultdict similar in structure to expected_matches, but contains
+                                    the actual neighboring points matched with each central point by the
                                     matching algorithm being tested.
 
     Returns:
-    - problematic_matches (list): A list of tuples, where each tuple contains a central point and its expected 
-                                  neighboring points that were not matched correctly by the matching algorithm. 
+    - problematic_matches (list): A list of tuples, where each tuple contains a central point and its expected
+                                  neighboring points that were not matched correctly by the matching algorithm.
                                   If the algorithm works correctly, this list will be empty.
     """
     problematic_matches = []
@@ -93,6 +93,7 @@ def check_Xmatching(expected_matches: dict, output_matches: defaultdict):
             problematic_matches.append((central, expected_neighbors))
             print(f"Group {central} does not match!")
     return problematic_matches
+
 
 def print_format_match(problematic_matches, central_point, surrounding_points):
     for match in problematic_matches:
@@ -122,6 +123,7 @@ class TestCelestialXMatching_RandomGrid(unittest.TestCase):
                                        the central points, and the second contains points surrounding the
                                        central points.
     """
+
     def setUp(self):
         # This method will be called before each test, setting up the common resources
         seed = np.random.randint(0, 1e5)
@@ -133,7 +135,7 @@ class TestCelestialXMatching_RandomGrid(unittest.TestCase):
             grid, self.tolerance, seed=seed, ring_radius=(0.999, 1.0), fraction=0.8)
         if panda:
             self.two_catalogs = (pd.DataFrame(self.two_catalogs[0], columns=['Ra', 'Dec']),
-                                    pd.DataFrame(self.two_catalogs[1], columns=['Ra', 'Dec']))
+                                 pd.DataFrame(self.two_catalogs[1], columns=['Ra', 'Dec']))
 
     def test_match_by_quadtree(self):
         output_matches = xmatch(self.two_catalogs[0], self.two_catalogs[1], self.tolerance).get_result_dict()
@@ -204,8 +206,8 @@ class TestInputFormatXMatch(unittest.TestCase):
 
     def test_with_numpy(self):
         # Test with numpy arrays
-        df1 = np.array([[1, 3], [2, 4], [8, 6]]) # shape (3, 2)
-        df2 = np.array([[5, 7], [6, 8], [7, 9]]) # shape (3, 2)
+        df1 = np.array([[1, 3], [2, 4], [8, 6]])  # shape (3, 2)
+        df2 = np.array([[5, 7], [6, 8], [7, 9]])  # shape (3, 2)
         self.result = xmatch(df1, df2, self.tolerance)
         self.assertIsNotNone(self.result)  # Assert result is not None
 

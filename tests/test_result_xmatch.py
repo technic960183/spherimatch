@@ -5,6 +5,7 @@ from numpy.typing import NDArray
 from spherimatch import xmatch
 from spherimatch.catalog import Catalog
 
+
 class TestXMatchResult_Methods(unittest.TestCase):
 
     def setUp(self):
@@ -16,11 +17,12 @@ class TestXMatchResult_Methods(unittest.TestCase):
             base_coords = np.vstack([base_ra, base_dec]).T
             unit_ra = np.vstack([np.ones(l), np.zeros(l)]).T
             unit_dec = np.vstack([np.zeros(l), np.ones(l)]).T
-            coords = np.array([base_coords + 120 * i * unit_ra + 20 * j * unit_dec for i in range(3) for j in range(-1, 2)])
+            coords = np.array([base_coords + 120 * i * unit_ra + 20 * j * unit_dec for i in range(3)
+                              for j in range(-1, 2)])
             coords = coords.reshape(-1, coords.shape[-1])
-            coords[:,0] = coords[:,0] % 360
+            coords[:, 0] = coords[:, 0] % 360
             return coords
-        
+
         base1 = np.array([-0.5, 0.1, 0.3]), np.array([0.2, -0.4, 0])
         base2 = np.array([0.5, -0.4]), np.array([-0.1, 0.6])
         self.coords1 = generate_offset_groups(*base1)
@@ -192,7 +194,7 @@ class TestXMatchResult_Methods(unittest.TestCase):
                 idx = i * (self.n2 + 1) + j + 1
                 self.assertAlmostEqual(df.iloc[idx]['A'], df2.loc[i // self.n1 * self.n2 + j, 'A'])
                 self.assertAlmostEqual(df.iloc[idx]['C'], df2.loc[i // self.n1 * self.n2 + j, 'C'])
-    
+
     @unittest.skip("Future functionality")
     def test_get_multiindex_dataframe(self):
         result = xmatch(self.coords1, self.coords2, 2)
@@ -206,9 +208,7 @@ class TestXMatchResult_Methods(unittest.TestCase):
         self.assertTrue(all(sizes == self.n2))
         for i in range(self.coords1.shape[0]):
             group_df = df.loc[i]
-            continue # [TODO] Check the content of the group dataframe
+            continue  # [TODO] Check the content of the group dataframe
 
     # [FIXME] Write a test to check that if itterating over the deaultdict, the keys won't be in the correct order.
     # Thus yielding an incorrect result of N_match.
-
-    

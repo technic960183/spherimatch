@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from .catalog import Catalog
 
+
 class XMatchResult:
 
     def __init__(self, cat1: Catalog, cat2: Catalog, tolerance, result_dict: defaultdict):
@@ -11,7 +12,7 @@ class XMatchResult:
         self.tolerance = tolerance
         self.result_dict = result_dict
         self.result_dict_reserve = None
-    
+
     def __str__(self):
         return f"XMatchResult of cat1 with {len(self.cat1)} objects and cat2 with {len(self.cat2)} objects."
 
@@ -25,7 +26,7 @@ class XMatchResult:
 
     def get_result_dict_reserve(self) -> defaultdict:
         # if self.result_dict_reserve is None: # [TODO] Save the result_dict_reserve to improve performance
-        temp_dd = defaultdict(list) # Improve the performance after fixing the issue of unsorted dictionary
+        temp_dd = defaultdict(list)  # Improve the performance after fixing the issue of unsorted dictionary
         for k, v in self.result_dict.items():
             for vv in v:
                 temp_dd[vv].append(k)
@@ -33,11 +34,11 @@ class XMatchResult:
         for idx in self.cat2.get_indexes():
             self.result_dict_reserve[idx] = temp_dd[idx]
         return self.result_dict_reserve
-    
+
     def get_dataframe1(self, min_match=0, coord_columns=['Ra', 'Dec'],
                        retain_all_columns=True, retain_columns=None) -> pd.DataFrame:
         '''Get the first catalog with the number of matches as a pandas dataframe.
-        
+
         Parameters
         ----------
         min_match : int, optional
@@ -64,7 +65,7 @@ class XMatchResult:
             data_df = pd.concat([data_df, append_df], axis=1)
         data_df = data_df[data_df['N_match'] >= min_match]
         return data_df
-    
+
     def get_dataframe2(self, min_match=0, coord_columns=['Ra', 'Dec'],
                        retain_all_columns=True, retain_columns=None) -> pd.DataFrame:
         '''Get the second catalog with the number of matches as a pandas dataframe.
@@ -91,9 +92,11 @@ class XMatchResult:
         Parameters
         ----------
         min_match : int, optional
-            The minimum number of matches for an object from the first catalog to be included in the dataframe. Default is 1.
+            The minimum number of matches for an object from the first catalog to be included in the dataframe.
+            Default is 1.
         reverse : bool, optional
-            Whether to reverse the order of catalogs (i.e., make the second catalog as the first and vice versa). Default is False.
+            Whether to reverse the order of catalogs (i.e., make the second catalog as the first and vice versa).
+            Default is False.
         coord_columns : list[str], optional
             The names of the columns for the coordinates. Default is ['Ra', 'Dec'].
         retain_all_columns : bool, optional
@@ -101,13 +104,13 @@ class XMatchResult:
         retain_columns : list[str], optional
             The names of the columns to retain in the output dataframe. Will override retain_all_columns if not empty.
             Default is None.
-         
+
         Returns
         -------
         pandas.DataFrame
             The serial dataframe of the two catalogs with the number of matches.
         '''
-        if reverse: # Create a new XMatchResult object with the reversed result_dict
+        if reverse:  # Create a new XMatchResult object with the reversed result_dict
             reserve_result = self.__class__(self.cat2, self.cat1, self.tolerance, self.get_result_dict_reserve())
             df = reserve_result.get_serial_dataframe(min_match, reverse=False, coord_columns=coord_columns,
                                                      retain_all_columns=retain_all_columns,
@@ -151,13 +154,13 @@ class XMatchResult:
         combined_df = pd.concat([df1, df2], ignore_index=False)
         data_df = combined_df.iloc[idx_combine]
         if retain_columns is not None:
-            non_existent_columns = [col for col in retain_columns if col not in data_df.columns]  
+            non_existent_columns = [col for col in retain_columns if col not in data_df.columns]
             if non_existent_columns:
                 raise KeyError(f"Columns {non_existent_columns} are not in the input DataFrame")
         data_df.insert(2, 'N_match', n_match)
         data_df.insert(3, 'is_cat1', is_df1)
         return data_df
-            
+
     def number_distribution(self) -> Counter:
         """Get the distribution of the number of matches for each object in the first catalog.
 
@@ -169,4 +172,3 @@ class XMatchResult:
         Ns = [len(v) for v in self.get_result_dict().values()]
         unique_counts = Counter(Ns)
         return unique_counts
-        

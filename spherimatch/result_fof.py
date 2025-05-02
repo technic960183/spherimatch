@@ -2,8 +2,9 @@ import pandas as pd
 import numpy as np
 from .catalog import Catalog
 
+
 class FoFResult:
-    
+
     def __init__(self, catalog: Catalog, tolerance: float, result_list: list):
         self.catalog = catalog
         self.tolerance = tolerance
@@ -19,7 +20,7 @@ class FoFResult:
         """
         objects_coordinates = self.catalog.get_coordiantes()
         return [[tuple(objects_coordinates[i, :]) for i in g] for g in self.result_list]
-    
+
     def get_group_coordinates(self) -> list[tuple]:
         """Returns the center coordinates of the groups.
 
@@ -31,7 +32,7 @@ class FoFResult:
         objects_coordinates = self.catalog.get_coordiantes()
         # [FIXME] This return a list of NDArrays, not a list of tuples.
         return [np.average(objects_coordinates[g, :], axis=0) for g in self.result_list]
-    
+
     def get_group_sizes(self) -> list[int]:
         """Returns the object counts in each group.
 
@@ -41,7 +42,7 @@ class FoFResult:
             A list of integers representing the number of objects in each group.
         """
         return [len(g) for g in self.result_list]
-    
+
     def get_group_dataframe(self, min_group_size=1, coord_columns=['Ra', 'Dec'],
                             retain_all_columns=True, retain_columns=None) -> pd.DataFrame:
         """Get the grouped data as a two-level indexed pandas DataFrame.
@@ -66,7 +67,7 @@ class FoFResult:
         new_index_tuples = []
         original_indices = []
         for group_index, group_indices in enumerate(self.result_list):
-            if len(group_indices) < min_group_size: # Skip groups with the size less than min_group_size
+            if len(group_indices) < min_group_size:  # Skip groups with the size less than min_group_size
                 continue
             for object_index in group_indices:
                 new_index_tuples.append((group_index, object_index))

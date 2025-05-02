@@ -54,12 +54,12 @@ def generate_celestial_grid(**kwargs) -> list[tuple[float, float]]:
     return grid
 
 
-def create_groups_from_grid(grid: list[tuple[float, float]], 
-                            tolerance=1, seed=None, fraction=0.5, 
+def create_groups_from_grid(grid: list[tuple[float, float]],
+                            tolerance=1, seed=None, fraction=0.5,
                             ring_radius=(0, 1)) -> tuple[list[list[tuple[float, float]]], NDArray]:
     """
     Randomly pick half of the grid points and create groups around them.
-    For each selected grid point, use the point_offset() function to create several points 
+    For each selected grid point, use the point_offset() function to create several points
     within a tolerance (default 1 degree) circle around the central point.
     Returns a list of groups, where each group is a list of (RA, Dec) coordinates.
     """
@@ -92,7 +92,7 @@ def check_group_match(expected_groups: list[list[tuple[float, float]]], output_g
         List of groups that are expected to be grouped correctly.
     output_groups : list[list[tuple[float, float]]]
         List of groups that are output by the tested function.
-    
+
     Returns
     -------
     problematic_groups : list[list[tuple[float, float]]]
@@ -116,11 +116,11 @@ class TestCelestialGrouping_RandomGrid(unittest.TestCase):
     """
     Unit test for a celestial objects grouping method.
 
-    The purpose of this unit test is to ensure that a celestial objects grouping method works correctly. 
-    A grid on the celestial sphere is created with a size of 10 deg. Half of the grid points are randomly 
-    selected, and for each selected point, several points are created within a 1 deg circle around it using 
-    the point_offset() function. These points, with the central point, become a 'group'. The tested function 
-    is then called, and its output is checked against the expected groups. If there's a discrepancy, the 
+    The purpose of this unit test is to ensure that a celestial objects grouping method works correctly.
+    A grid on the celestial sphere is created with a size of 10 deg. Half of the grid points are randomly
+    selected, and for each selected point, several points are created within a 1 deg circle around it using
+    the point_offset() function. These points, with the central point, become a 'group'. The tested function
+    is then called, and its output is checked against the expected groups. If there's a discrepancy, the
     problematic group is printed.
     """
 

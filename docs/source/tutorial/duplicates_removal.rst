@@ -12,10 +12,10 @@ First, let's create a mock catalog with duplicates:
     import pandas as pd
 
     # Create a mock catalog as a pandas DataFrame
-    catalog = pd.DataFrame([[80.894, 41.269, 1200], [120.689, -41.269, 1500], 
-                            [10.689, -41.269, 3600], [10.688, -41.270, 300], 
-                            [10.689, -41.270, 1800], [10.690, -41.269, 2400], 
-                            [120.690, -41.270, 900], [10.689, -41.269, 2700]], 
+    catalog = pd.DataFrame([[80.894, 41.269, 1200], [120.689, -41.269, 1500],
+                            [10.689, -41.269, 3600], [10.688, -41.270, 300],
+                            [10.689, -41.270, 1800], [10.690, -41.269, 2400],
+                            [120.690, -41.270, 900], [10.689, -41.269, 2700]],
                             columns=['ra', 'dec', 'exp_time'])
 
 Here, we actually only have 3 unique objects, but the catalog contains 8 entries and 5 of them are duplicates.

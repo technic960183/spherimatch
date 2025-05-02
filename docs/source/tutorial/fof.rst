@@ -11,9 +11,9 @@ First, let's create a mock catalog:
     import pandas as pd
 
     # Create a mock catalog as a pandas DataFrame
-    catalog = pd.DataFrame([[80.894, 41.269, 15.5], [120.689, -41.269, 12.3], 
-                            [10.689, -41.269, 18.7], [10.688, -41.270, 14.1], 
-                            [10.689, -41.270, 16.4], [10.690, -41.269, 13.2], 
+    catalog = pd.DataFrame([[80.894, 41.269, 15.5], [120.689, -41.269, 12.3],
+                            [10.689, -41.269, 18.7], [10.688, -41.270, 14.1],
+                            [10.689, -41.270, 16.4], [10.690, -41.269, 13.2],
                             [120.690, -41.270, 17.8]], columns=['ra', 'dec', 'mag'])
 
 .. note::
@@ -47,7 +47,7 @@ To get the clustering results with the appendind data (``'mag'`` in this case), 
 Expected output::
 
                        Ra     Dec   mag
-    Group Object                       
+    Group Object
     0     0        80.894  41.269  15.5
     1     1       120.689 -41.269  12.3
           6       120.690 -41.270  17.8
@@ -72,20 +72,20 @@ Expected output::
     Print group 0:
     The type of group is <class 'pandas.core.frame.DataFrame'>.
                       Ra     Dec   mag
-    Group Object                      
+    Group Object
     0     0       80.894  41.269  15.5
 
     Print group 1:
     The type of group is <class 'pandas.core.frame.DataFrame'>.
                        Ra     Dec   mag
-    Group Object                       
+    Group Object
     1     1       120.689 -41.269  12.3
           6       120.690 -41.270  17.8
 
     Print group 2:
     The type of group is <class 'pandas.core.frame.DataFrame'>.
                       Ra     Dec   mag
-    Group Object                      
+    Group Object
     2     2       10.689 -41.269  18.7
           3       10.688 -41.270  14.1
           4       10.689 -41.270  16.4
@@ -108,7 +108,7 @@ If you want DataFrame with a single layer of index and the size of each group as
 Expected output::
 
             Group       Ra     Dec   mag  group_size
-    Object                                          
+    Object
     0           0   80.894  41.269  15.5           1
     1           1  120.689 -41.269  12.3           2
     6           1  120.690 -41.270  17.8           2

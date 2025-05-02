@@ -6,7 +6,7 @@ from spherimatch import ChunkGeneratorByDenseGrid, ChunkGeneratorBySuperDenseGri
 from spherimatch import GridChunkGenerator
 from spherimatch import DisjointSet
 from spherimatch.catalog import Catalog
-from spherimatch.result_fof import FoFResult 
+from spherimatch.result_fof import FoFResult
 from spherimatch.fof import group_by_quadtree_chunk
 
 
@@ -68,6 +68,7 @@ class TestChunkGeneratorByGrid_coor2id_boundary(unittest.TestCase):
         result = chunk_gen.coor2id_boundary(ra, dec)
         self.assertEqual(result, expected_result)
 
+
 class TestChunkIntegratingFoF(unittest.TestCase):
 
     def group_by_quadtree_scipy(self, objects_df: pd.DataFrame, tolerance, chunk_gen):
@@ -100,7 +101,7 @@ class TestChunkIntegratingFoF(unittest.TestCase):
         print(len(result_a.get_coordinates()))
         print(len(result_b.get_coordinates()))
         self.assertEqual(len(result_a.get_coordinates()), len(result_b.get_coordinates()))
-        
+
 
 # Running the tests
 if __name__ == '__main__':

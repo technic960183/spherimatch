@@ -17,7 +17,7 @@ please refer to the `API Reference <../ref/index.html>`_ or the `Tutorials <../t
 To develop the project, clone the repository and install the project in editable mode.
 
 .. code-block:: console
-   
+
    $ git clone https://github.com/technic960183/spherimatch.git
    $ cd spherimatch
    $ pip install -e .[dev]

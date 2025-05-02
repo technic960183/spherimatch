@@ -21,7 +21,7 @@ class ChunkGenerator:
         ----------
         catalog : Catalog
             The catalog to be distributed.
-        
+
         Returns
         -------
         chunks : list[Chunk]
@@ -55,14 +55,14 @@ class ChunkGenerator:
         '''Tell which chunk the given coordinate belongs to. (How to divide the sky.)
 
         --- SHOULD BE overridden by subclass ---
-        
+
         Parameters
         ----------
         ra : numpy.ndarray
             The array of RA. Shape: (N,).
         dec : numpy.ndarray
             The array of Dec. Shape: (N,).
-        
+
         Returns
         -------
         chink_id : numpy.ndarray
@@ -84,7 +84,7 @@ class ChunkGenerator:
             The array of RA. Shape: (N,).
         dec : numpy.ndarray
             The array of Dec. Shape: (N,).
-        
+
         Returns
         -------
         list_of_chunk_of_list_of_object_index : list

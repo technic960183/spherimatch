@@ -10,6 +10,7 @@ from .result_fof import FoFResult
 from .utilities_spherical import radec_to_cartesian, cartesian_to_radec
 from .utilities_spherical import great_circle_distance, rotate_radec_about_axis
 
+
 def group_by_quadtree(catalog, tolerance, dec_bound=None, ring_chunk=None) -> FoFResult:
     warnings.warn("This function will be deprecated. Use fof() instead.", FutureWarning)
     if dec_bound is not None:
@@ -17,6 +18,7 @@ def group_by_quadtree(catalog, tolerance, dec_bound=None, ring_chunk=None) -> Fo
     if ring_chunk is not None:
         raise ValueError("The ring_chunk parameter is no longer supported.")
     return fof(catalog, tolerance)
+
 
 def fof(catalog, tolerance) -> FoFResult:
     """Perform the Friends-of-Friends (FoF) grouping algorithm on a catalog.
@@ -45,7 +47,7 @@ def fof(catalog, tolerance) -> FoFResult:
     cg = GridChunkGenerator(margin=2*tolerance)
     cg.set_symmetric_ring_chunk(dec_bound, ring_chunk)
     cg.distribute(_catalog)
-    
+
     # print(f"Using a single process to group {len(cg.chunks)} chunks.")
     ds = DisjointSet(len(_catalog))
     for chunk in cg.chunks:
