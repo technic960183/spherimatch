@@ -232,7 +232,7 @@ class TestCelestialGrouping(unittest.TestCase):
         point_now = (ra_now, dec_now)
         all_points = [point_now]
         for _ in range(1000):
-            node = all_points[np.random.randint(0, len(all_points))]
+            node = all_points[np.random.randint(0, len(all_points))]  # pylint: disable=invalid-sequence-index
             point_now = point_offset(node, np.random.uniform(0, 1), np.random.uniform(0, 360))
             all_points.append(point_now)
         all_points = np.array(all_points)
