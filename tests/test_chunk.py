@@ -1,13 +1,13 @@
 import unittest
 import numpy as np
 import pandas as pd
-from spherimatch import ChunkGeneratorByGrid
-from spherimatch import ChunkGeneratorByDenseGrid, ChunkGeneratorBySuperDenseGrid
-from spherimatch import GridChunkGenerator
-from spherimatch import DisjointSet
 from spherimatch.catalog import Catalog
-from spherimatch.result_fof import FoFResult
+from spherimatch.chunk_generator_grid import ChunkGeneratorByGrid, GridChunkGenerator
+from spherimatch.disjoint_set import DisjointSet
 from spherimatch.fof import group_by_quadtree_chunk
+from spherimatch.result_fof import FoFResult
+
+# from spherimatch.chunk_generator_grid import ChunkGeneratorByDenseGrid, ChunkGeneratorBySuperDenseGrid
 
 
 class TestChunkGeneratorByGrid_coor2id_central(unittest.TestCase):

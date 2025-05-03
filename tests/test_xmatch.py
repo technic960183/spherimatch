@@ -1,10 +1,10 @@
-from collections import defaultdict
 import unittest
+from collections import defaultdict
 import numpy as np
 import pandas as pd
-from spherimatch import point_offset, generate_random_point
+from tests.test_fof import generate_celestial_grid
 from spherimatch import xmatch
-from .test_fof import generate_celestial_grid
+from spherimatch.utilities_spherical import point_offset
 
 
 def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_radius=(0, 1)):

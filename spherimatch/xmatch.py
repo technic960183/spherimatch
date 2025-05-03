@@ -6,9 +6,13 @@ from .chunk import Chunk
 from .chunk_generator_grid import GridChunkGenerator
 from .euclidean_vs_angular_distance_local import compute_error
 from .result_xmatch import XMatchResult
-from .utilities_spherical import radec_to_cartesian, cartesian_to_radec
-from .utilities_spherical import great_circle_distance, rotate_radec_about_axis
-from .utilities_spherical import distances_to_target
+from .utilities_spherical import (
+    cartesian_to_radec,
+    distances_to_target,
+    great_circle_distance,
+    radec_to_cartesian,
+    rotate_radec_about_axis,
+)
 
 
 def unique_merge_defaultdicts(d1: defaultdict, d2: defaultdict):

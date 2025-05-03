@@ -1,6 +1,6 @@
+from numpy.typing import NDArray
 from .catalog import Catalog
 from .chunk import Chunk
-from numpy.typing import NDArray
 
 
 class ChunkGenerator:

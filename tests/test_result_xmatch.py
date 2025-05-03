@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 from numpy.typing import NDArray
 from spherimatch import xmatch
-from spherimatch.catalog import Catalog
 
 
 class TestXMatchResult_Methods(unittest.TestCase):

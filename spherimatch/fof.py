@@ -7,8 +7,12 @@ from .chunk_generator_grid import GridChunkGenerator
 from .disjoint_set import DisjointSet
 from .euclidean_vs_angular_distance_local import compute_error
 from .result_fof import FoFResult
-from .utilities_spherical import radec_to_cartesian, cartesian_to_radec
-from .utilities_spherical import great_circle_distance, rotate_radec_about_axis
+from .utilities_spherical import (
+    cartesian_to_radec,
+    great_circle_distance,
+    radec_to_cartesian,
+    rotate_radec_about_axis,
+)
 
 
 def group_by_quadtree(catalog, tolerance, dec_bound=None, ring_chunk=None) -> FoFResult:

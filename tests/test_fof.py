@@ -1,9 +1,11 @@
 import unittest
 import numpy as np
 from numpy.typing import NDArray
-from spherimatch import point_offset, generate_random_point
-# from spherimatch import group_by_disjoint_set, group_by_DFS
 from spherimatch import fof
+from spherimatch.utilities_spherical import point_offset
+
+# from spherimatch.utilities_spherical import generate_random_point
+# from spherimatch import group_by_disjoint_set, group_by_DFS
 
 
 def generate_celestial_grid(**kwargs) -> list[tuple[float, float]]:

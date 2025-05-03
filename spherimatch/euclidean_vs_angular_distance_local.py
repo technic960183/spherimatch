@@ -2,7 +2,6 @@ import numpy as np
 from scipy.spatial.distance import euclidean
 from .utilities_spherical import point_offset
 
-
 '''
 This script provides a detailed analysis of the discrepancies between Euclidean
 and angular distances on a spherical coordinate system, particularly examining

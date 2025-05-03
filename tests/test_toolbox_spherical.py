@@ -1,7 +1,11 @@
 import unittest
 import numpy as np
-from spherimatch import distances_to_target, point_offset, rotate_radec_about_axis
-from spherimatch import great_circle_distance
+from spherimatch.utilities_spherical import (
+    distances_to_target,
+    great_circle_distance,
+    point_offset,
+    rotate_radec_about_axis,
+)
 
 
 class TestAngularDistance(unittest.TestCase):
