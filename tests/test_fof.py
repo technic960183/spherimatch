@@ -152,7 +152,7 @@ class TestCelestialGrouping_RandomGrid(unittest.TestCase):
         self.assertEqual(len(problematic_groups), 0, f"Failed groups: {problematic_groups}")
 
 
-class TestCelestialGrouping_Random(unittest.TestCase):
+# class TestCelestialGrouping_Random(unittest.TestCase):
 
     # def test_comparing_DFS_quadtree(self):
     #     ra, dec = generate_random_point(10000)
@@ -163,22 +163,23 @@ class TestCelestialGrouping_Random(unittest.TestCase):
     #     problematic_groups = check_group_match(output_groups_dfs, output_groups_qt)
     #     self.assertEqual(len(problematic_groups), 0, f"Failed groups: {problematic_groups}")
 
-    @unittest.skip("This test takes too long to run.")
-    def test_comparing_chunk_setting(self):
-        ra, dec = generate_random_point(10000, seed=0)
-        all_points = np.array([ra, dec]).T
-        tolerance = 1.5
-        output_groups_base = fof(all_points, tolerance, dec_bound=60, ring_chunk=[6, 6]).get_coordinates()
-        for i in range(400):
-            print(f"Test {i+1} started!")
-            dec = np.random.uniform(50, 80)
-            N = np.random.randint(2, 6)
-            ring = [np.random.randint(6, 12) for _ in range(N)]
-            output_groups_test = fof(all_points, tolerance, dec_bound=dec, ring_chunk=ring).get_coordinates()
-            problematic_groups = check_group_match(output_groups_test, output_groups_base)
-            self.assertEqual(
-                len(problematic_groups),
-                0, f"Failed groups: {problematic_groups} with dec_bound={dec}, ring_chunk={ring}")
+    # [TODO] This test has not been updated to the new API yet.
+    # @unittest.skip("This test takes too long to run.")
+    # def test_comparing_chunk_setting(self):
+    #     ra, dec = generate_random_point(10000, seed=0)
+    #     all_points = np.array([ra, dec]).T
+    #     tolerance = 1.5
+    #     output_groups_base = fof(all_points, tolerance, dec_bound=60, ring_chunk=[6, 6]).get_coordinates()
+    #     for i in range(400):
+    #         print(f"Test {i+1} started!")
+    #         dec = np.random.uniform(50, 80)
+    #         N = np.random.randint(2, 6)
+    #         ring = [np.random.randint(6, 12) for _ in range(N)]
+    #         output_groups_test = fof(all_points, tolerance, dec_bound=dec, ring_chunk=ring).get_coordinates()
+    #         problematic_groups = check_group_match(output_groups_test, output_groups_base)
+    #         self.assertEqual(
+    #             len(problematic_groups),
+    #             0, f"Failed groups: {problematic_groups} with dec_bound={dec}, ring_chunk={ring}")
 
 
 class TestCelestialGrouping(unittest.TestCase):
@@ -250,12 +251,12 @@ def print_format_group(groups):
         print(f"[X] {central_point_str}: [{surrounding_points_str}]")
 
 
-if __name__ == "__main__":
-    # unittest.main(verbosity=2)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialGrouping_Random)
-    unittest.TextTestRunner(verbosity=2).run(suite)
-    for i in range(0):
-        ut = TestCelestialGrouping_RandomGrid()
-        ut.setUp()
-        ut.test_group_by_quadtree()
-        print(f"Test {i+1} passed!")
+# if __name__ == "__main__":
+#     # unittest.main(verbosity=2)
+#     suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialGrouping_Random)
+#     unittest.TextTestRunner(verbosity=2).run(suite)
+#     for i in range(0):
+#         ut = TestCelestialGrouping_RandomGrid()
+#         ut.setUp()
+#         ut.test_group_by_quadtree()
+#         print(f"Test {i+1} passed!")

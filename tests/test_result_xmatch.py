@@ -73,7 +73,6 @@ class TestXMatchResult_Methods(unittest.TestCase):
 
     def test_get_dataframe1_retain_all_columns_False(self):
         columns = ['RA', 'DEC']
-        retain_columns = ['A', 'B']
         df1 = pd.DataFrame(self.coords1, columns=columns)
         df1['A'] = np.cos(self.coords1[:, 0]) + np.arange(self.coords1.shape[0])
         df1['B'] = np.sin(self.coords1[:, 1]) + np.arange(self.coords1.shape[0])
@@ -84,7 +83,6 @@ class TestXMatchResult_Methods(unittest.TestCase):
 
     def test_get_dataframe1_retain_columns(self):
         columns = ['RA', 'DEC']
-        retain_columns = ['A', 'B']
         df1 = pd.DataFrame(self.coords1, columns=columns)
         df1['A'] = np.cos(self.coords1[:, 0]) + np.arange(self.coords1.shape[0])
         df1['B'] = np.sin(self.coords1[:, 1]) + np.arange(self.coords1.shape[0])
@@ -194,20 +192,20 @@ class TestXMatchResult_Methods(unittest.TestCase):
                 self.assertAlmostEqual(df.iloc[idx]['A'], df2.loc[i // self.n1 * self.n2 + j, 'A'])
                 self.assertAlmostEqual(df.iloc[idx]['C'], df2.loc[i // self.n1 * self.n2 + j, 'C'])
 
-    @unittest.skip("Future functionality")
-    def test_get_multiindex_dataframe(self):
-        result = xmatch(self.coords1, self.coords2, 2)
-        columns = ['Ra', 'Deccc']
-        df = result.get_multiindex_dataframe(coord_columns=columns)
-        self.assertEqual(len(df), self.coords1.shape[0] + self.coords2.shape[0] * self.n1)
-        self.assertListEqual(list(df.columns), ['Catalog', 'Column'])
-        self.assertListEqual(list(df.index), ['Group', 'Object'])
-        sizes = df.groupby('Group').size()
-        self.assertEqual(len(sizes), self.coords1.shape[0])
-        self.assertTrue(all(sizes == self.n2))
-        for i in range(self.coords1.shape[0]):
-            group_df = df.loc[i]
-            continue  # [TODO] Check the content of the group dataframe
+    # @unittest.skip("Future functionality")
+    # def test_get_multiindex_dataframe(self):
+    #     result = xmatch(self.coords1, self.coords2, 2)
+    #     columns = ['Ra', 'Deccc']
+    #     df = result.get_multiindex_dataframe(coord_columns=columns)
+    #     self.assertEqual(len(df), self.coords1.shape[0] + self.coords2.shape[0] * self.n1)
+    #     self.assertListEqual(list(df.columns), ['Catalog', 'Column'])
+    #     self.assertListEqual(list(df.index), ['Group', 'Object'])
+    #     sizes = df.groupby('Group').size()
+    #     self.assertEqual(len(sizes), self.coords1.shape[0])
+    #     self.assertTrue(all(sizes == self.n2))
+    #     for i in range(self.coords1.shape[0]):
+    #         group_df = df.loc[i]
+    #         continue  # [TODO] Check the content of the group dataframe
 
     # [FIXME] Write a test to check that if itterating over the deaultdict, the keys won't be in the correct order.
     # Thus yielding an incorrect result of N_match.
