@@ -6,8 +6,7 @@ from .chunk import Chunk
 class ChunkGenerator:
 
     def __init__(self, margin: float) -> None:
-        '''Initialize the chunk generator.
-        '''
+        '''Initialize the chunk generator.'''
         self.chunks: list[Chunk] = []
         self.margin = margin
 
@@ -34,7 +33,7 @@ class ChunkGenerator:
         # Get chunk ids for central coordinates
         central_chunk_ids = self.coor2id_central(ra, dec)
         for i in range(len(self.chunks)):
-            mask = (central_chunk_ids == i)
+            mask = central_chunk_ids == i
             self.chunks[i].add_central_data(coordiantes[mask], indexes[mask])
 
         # Get chunk ids for boundary coordinates

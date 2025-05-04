@@ -113,9 +113,13 @@ class XMatchResult:
         '''
         if reverse:  # Create a new XMatchResult object with the reversed result_dict
             reserve_result = self.__class__(self.cat2, self.cat1, self.tolerance, self.get_result_dict_reserve())
-            df = reserve_result.get_serial_dataframe(min_match, reverse=False, coord_columns=coord_columns,
-                                                     retain_all_columns=retain_all_columns,
-                                                     retain_columns=retain_columns)
+            df = reserve_result.get_serial_dataframe(
+                min_match,
+                reverse=False,
+                coord_columns=coord_columns,
+                retain_all_columns=retain_all_columns,
+                retain_columns=retain_columns,
+            )
             df['is_cat1'] = ~df['is_cat1']
             return df
         idxes1 = self.cat1.get_indexes()

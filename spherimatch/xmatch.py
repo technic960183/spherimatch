@@ -80,8 +80,8 @@ def xmatch(catalog1, catalog2, tolerance, verbose=False) -> XMatchResult:
     # [ENH]: Add an option for sorting the output
     _catalog1 = Catalog(catalog1)
     _catalog2 = Catalog(catalog2)
-    cg1 = GridChunkGenerator(margin=2*tolerance)
-    cg2 = GridChunkGenerator(margin=2*tolerance)
+    cg1 = GridChunkGenerator(margin=2 * tolerance)
+    cg2 = GridChunkGenerator(margin=2 * tolerance)
     cg1.set_symmetric_ring_chunk(60, [6, 6])
     cg2.set_symmetric_ring_chunk(60, [6, 6])
     cg1.distribute(_catalog1)
@@ -103,7 +103,7 @@ def xmatch(catalog1, catalog2, tolerance, verbose=False) -> XMatchResult:
 def rotate_to_center(object_coor, chunk_ra, chunk_dec):
     # Rotate the center of the chunk to (180, 0) of the celestial sphere
     center_car = radec_to_cartesian(chunk_ra, chunk_dec)
-    normal_car = np.cross(center_car, np.array([-1., 0., 0.]))
+    normal_car = np.cross(center_car, np.array([-1.0, 0.0, 0.0]))
     normal_car /= np.linalg.norm(normal_car)
     normal_ra, normal_dec = cartesian_to_radec(normal_car)
     angle = great_circle_distance(chunk_ra, chunk_dec, 180, 0)

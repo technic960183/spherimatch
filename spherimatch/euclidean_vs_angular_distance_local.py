@@ -92,8 +92,7 @@ def compute_error(declination, distance):
 def compute_max_relative_error(dec, distances, theta_values):
     origin = (180, dec)
     offset_points_theta = np.array(point_offset(origin, distances, theta_values))
-    euclidean_distances_theta = np.array([euclidean(origin, offset_point)
-                                          for offset_point in offset_points_theta.T])
+    euclidean_distances_theta = np.array([euclidean(origin, offset_point) for offset_point in offset_points_theta.T])
     relative_errors = np.abs((euclidean_distances_theta - distances) / distances)
     max_relative_error = np.max(relative_errors)
     angle_of_max_error = theta_values[np.argmax(relative_errors)]

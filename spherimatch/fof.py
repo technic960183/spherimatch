@@ -48,7 +48,7 @@ def fof(catalog, tolerance) -> FoFResult:
     dec_bound, ring_chunk = DEC_BOUND, RING_CHUNK
 
     _catalog = Catalog(catalog)
-    cg = GridChunkGenerator(margin=2*tolerance)
+    cg = GridChunkGenerator(margin=2 * tolerance)
     cg.set_symmetric_ring_chunk(dec_bound, ring_chunk)
     cg.distribute(_catalog)
 
@@ -68,7 +68,7 @@ def group_by_quadtree_chunk(args: tuple[Chunk, float]):
     # Rotate the center of the chunk to (180, 0) of the celestial sphere
     ra, dec = chunk.get_center()
     center_car = radec_to_cartesian(ra, dec)
-    normal_car = np.cross(center_car, np.array([-1., 0., 0.]))
+    normal_car = np.cross(center_car, np.array([-1.0, 0.0, 0.0]))
     normal_car /= np.linalg.norm(normal_car)
     normal_ra, normal_dec = cartesian_to_radec(normal_car)
     angle = great_circle_distance(ra, dec, 180, 0)

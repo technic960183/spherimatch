@@ -38,7 +38,7 @@ def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_r
         seed = np.random.randint(0, 1e6)
     np.random.seed(seed)
     np.random.shuffle(grid)
-    selected_points = grid[:np.floor(len(grid)*fraction).astype(int)]
+    selected_points = grid[: np.floor(len(grid) * fraction).astype(int)]
 
     centrals = []
     neighbors = []
@@ -49,7 +49,7 @@ def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_r
         idxes = []  # List of indexes of the surrounding points
         for _ in range(np.random.randint(5, 10)):  # Randomly create 1 to 4 additional points
             theta = np.random.uniform(0, 360)  # Random direction
-            distance = np.random.uniform(tolerance*ring_radius[0], tolerance*ring_radius[1])  # Random distance
+            distance = np.random.uniform(tolerance * ring_radius[0], tolerance * ring_radius[1])  # Random distance
             offset_point = point_offset(point, distance, theta)
             neighbors.append(offset_point)
             idxes.append(i_cat2)

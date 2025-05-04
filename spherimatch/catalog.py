@@ -40,8 +40,7 @@ class Catalog:
         self._check_validity_range()
 
     def _check_validity_range(self):
-        '''Check the validity of the input data. Warning if the data is out of range.
-        '''
+        '''Check the validity of the input data. Warning if the data is out of range.'''
         if np.any(self.ra < 0) or np.any(self.ra > 360):
             print("Warning: Ra values are out of range [0, 360]!")
         if np.any(self.dec < -90) or np.any(self.dec > 90):
@@ -73,8 +72,7 @@ class Catalog:
         '''
         return np.arange(len(self.ra), dtype=np.int64)
 
-    def get_appending_data(self, retain_all_columns=True, retain_columns=None,
-                           invalid_key_error=True) -> pd.DataFrame:
+    def get_appending_data(self, retain_all_columns=True, retain_columns=None, invalid_key_error=True) -> pd.DataFrame:
         '''Get the appending data of the points in the catalog for xmatch and fof.
 
         Parameters

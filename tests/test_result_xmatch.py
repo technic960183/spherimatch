@@ -16,8 +16,9 @@ class TestXMatchResult_Methods(unittest.TestCase):
             base_coords = np.vstack([base_ra, base_dec]).T
             unit_ra = np.vstack([np.ones(length), np.zeros(length)]).T
             unit_dec = np.vstack([np.zeros(length), np.ones(length)]).T
-            coords = np.array([base_coords + 120 * i * unit_ra + 20 * j * unit_dec for i in range(3)
-                              for j in range(-1, 2)])
+            coords = np.array(
+                [base_coords + 120 * i * unit_ra + 20 * j * unit_dec for i in range(3) for j in range(-1, 2)]
+            )
             coords = coords.reshape(-1, coords.shape[-1])
             coords[:, 0] = coords[:, 0] % 360
             return coords

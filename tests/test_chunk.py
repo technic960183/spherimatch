@@ -93,9 +93,9 @@ class TestChunkIntegratingFoF(unittest.TestCase):
 
     def test_different_chunk(self):
         tolerance = 0.01
-        cg_a = GridChunkGenerator(margin=2*tolerance)
+        cg_a = GridChunkGenerator(margin=2 * tolerance)
         cg_a.set_symmetric_ring_chunk(60, [6, 6])
-        cg_b = ChunkGeneratorByGrid(margin=2*tolerance)
+        cg_b = ChunkGeneratorByGrid(margin=2 * tolerance)
         result_a = self.group_by_quadtree_scipy(self.df_a, tolerance, cg_a)
         result_b = self.group_by_quadtree_scipy(self.df_b, tolerance, cg_b)
         print(len(result_a.get_coordinates()))

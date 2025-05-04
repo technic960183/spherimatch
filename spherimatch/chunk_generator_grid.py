@@ -119,8 +119,8 @@ class GridChunkGenerator(ChunkGenerator):
             # The line below should make no difference, because the central parts don't cross the 0-360 boundary.
             ra_diff = np.minimum(ra_diff, 360 - ra_diff)
             dec_diff = np.abs(dec - config['center_dec'])
-            mask_ra = (ra_diff <= config['delta_ra'])
-            mask_dec = (dec_diff <= config['delta_dec'])
+            mask_ra = ra_diff <= config['delta_ra']
+            mask_dec = dec_diff <= config['delta_dec']
             mask = mask_ra & mask_dec
             chunk_ids[mask] = i + 2
 
@@ -146,10 +146,16 @@ class GridChunkGenerator(ChunkGenerator):
             # Necessary. The boundary parts DO cross the 0-360 boundary.
             ra_diff = np.minimum(ra_diff, 360 - ra_diff)
             dec_diff = np.abs(dec - config['center_dec'])
-            mask_ra = (ra_diff >= config['delta_ra']) & (ra_diff <= config['delta_ra'] + margin) & (
-                dec_diff <= config['delta_dec'] + margin)
-            mask_dec = (dec_diff >= config['delta_dec']) & (dec_diff <= config['delta_dec'] + margin) & (
-                ra_diff <= config['delta_ra'] + margin)
+            mask_ra = (
+                (ra_diff >= config['delta_ra'])
+                & (ra_diff <= config['delta_ra'] + margin)
+                & (dec_diff <= config['delta_dec'] + margin)
+            )
+            mask_dec = (
+                (dec_diff >= config['delta_dec'])
+                & (dec_diff <= config['delta_dec'] + margin)
+                & (ra_diff <= config['delta_ra'] + margin)
+            )
             mask = mask_ra | mask_dec
             list_of_chunk_of_list_of_object_index.append(list(np.where(mask)[0]))
 
@@ -171,4 +177,4 @@ class ChunkGeneratorByDenseGrid(GridChunkGenerator):
 class ChunkGeneratorBySuperDenseGrid(GridChunkGenerator):
     def __init__(self, margin):
         super().__init__(margin=margin)
-        self.set_symmetric_ring_chunk(polar_dec=80, Ns_horizontal_ring=[24]*10)
+        self.set_symmetric_ring_chunk(polar_dec=80, Ns_horizontal_ring=[24] * 10)

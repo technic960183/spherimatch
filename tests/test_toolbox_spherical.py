@@ -173,8 +173,9 @@ class TestRotateRADEC(unittest.TestCase):
         new_ra1, new_dec1 = rotate_radec_about_axis(ra, dec, axis_ra, axis_dec, theta1)
         new_ra2, new_dec2 = rotate_radec_about_axis(new_ra1, new_dec1, axis_ra, axis_dec, theta2)
         new_ra_combined, new_dec_combined = rotate_radec_about_axis(ra, dec, axis_ra, axis_dec, theta1 + theta2)
-        self.assertTrue(np.isclose(new_ra2, new_ra_combined, atol=1e-5)
-                        and np.isclose(new_dec2, new_dec_combined, atol=1e-5))
+        self.assertTrue(
+            np.isclose(new_ra2, new_ra_combined, atol=1e-5) and np.isclose(new_dec2, new_dec_combined, atol=1e-5)
+        )
 
 
 if __name__ == '__main__':

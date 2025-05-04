@@ -31,7 +31,7 @@ def distances_to_target(target, points):
     # Haversine formula
     delta_ra = points_rad[:, 0] - target_rad[0]
     delta_dec = points_rad[:, 1] - target_rad[1]
-    a = np.sin(delta_dec/2.0)**2 + np.cos(target_rad[1]) * np.cos(points_rad[:, 1]) * np.sin(delta_ra/2.0)**2
+    a = np.sin(delta_dec / 2.0) ** 2 + np.cos(target_rad[1]) * np.cos(points_rad[:, 1]) * np.sin(delta_ra / 2.0) ** 2
     distances = 2 * np.arcsin(np.sqrt(a))
 
     # Convert back to degrees

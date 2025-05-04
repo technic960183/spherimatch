@@ -56,9 +56,9 @@ def generate_celestial_grid(**kwargs) -> list[tuple[float, float]]:
     return grid
 
 
-def create_groups_from_grid(grid: list[tuple[float, float]],
-                            tolerance=1., seed=None, fraction=0.5,
-                            ring_radius=(0, 1)) -> tuple[list[list[tuple[float, float]]], NDArray]:
+def create_groups_from_grid(
+    grid: list[tuple[float, float]], tolerance=1.0, seed=None, fraction=0.5, ring_radius=(0, 1)
+) -> tuple[list[list[tuple[float, float]]], NDArray]:
     """
     Randomly pick half of the grid points and create groups around them.
     For each selected grid point, use the point_offset() function to create several points
@@ -69,7 +69,7 @@ def create_groups_from_grid(grid: list[tuple[float, float]],
         seed = np.random.randint(0, 1e6)
     np.random.seed(seed)
     np.random.shuffle(grid)
-    selected_points = grid[:np.floor(len(grid)*fraction).astype(int)]
+    selected_points = grid[: np.floor(len(grid) * fraction).astype(int)]
 
     groups = []
     for point in selected_points:
@@ -77,8 +77,8 @@ def create_groups_from_grid(grid: list[tuple[float, float]],
         for _ in range(np.random.randint(1, 5)):  # Randomly create 1 to 4 additional points
             theta = np.random.uniform(0, 360)  # Random direction
             offset_point = point_offset(
-                point, np.random.uniform(tolerance*ring_radius[0], tolerance*ring_radius[1]),
-                theta)  # Random distance within 1 deg (tolerance)
+                point, np.random.uniform(tolerance * ring_radius[0], tolerance * ring_radius[1]), theta
+            )  # Random distance within 1 deg (tolerance)
             group.append(offset_point)
         groups.append(group)
     all_points = np.array([point for group in groups for point in group[0:]])
@@ -211,7 +211,9 @@ class TestCelestialGrouping(unittest.TestCase):
         tolerance = 2
         all_points = np.array(grid)
         output_groups = fof(all_points, tolerance).get_coordinates()
-        self.assertEqual(len(output_groups), (dec_range//5)*2+1, f"Number of groups obtained: {len(output_groups)}")
+        self.assertEqual(
+            len(output_groups), (dec_range // 5) * 2 + 1, f"Number of groups obtained: {len(output_groups)}"
+        )
 
     def test_qt_random_walk(self):
         ra_now = np.random.uniform(0, 360)
