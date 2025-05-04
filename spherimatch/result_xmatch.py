@@ -58,7 +58,7 @@ class XMatchResult:
             The dataframe of the first catalog with the number of matches.
         '''
         idxes_array = self.cat1.get_indexes()
-        coords_array = self.cat1.get_coordiantes()
+        coords_array = self.cat1.get_coordinates()
         data_df = pd.DataFrame(coords_array, columns=coord_columns, index=idxes_array)
         data_df['N_match'] = [len(v) for v in self.get_result_dict().values()]
         append_df = self.cat1.get_appending_data(retain_all_columns, retain_columns)
@@ -74,7 +74,7 @@ class XMatchResult:
         Please refer to the `get_dataframe1()` and replace the 'first catalog' with the 'second catalog'.
         '''
         idxes_array = self.cat2.get_indexes()
-        coords_array = self.cat2.get_coordiantes()
+        coords_array = self.cat2.get_coordinates()
         data_df = pd.DataFrame(coords_array, columns=coord_columns, index=idxes_array)
         data_df['N_match'] = [len(v) for v in self.get_result_dict_reserve().values()]
         append_df = self.cat2.get_appending_data(retain_all_columns, retain_columns)
@@ -146,8 +146,8 @@ class XMatchResult:
         idx_combine[~is_df1_np] += n1
         idxes_array1 = self.cat1.get_indexes()
         idxes_array2 = self.cat2.get_indexes()
-        df1 = pd.DataFrame(self.cat1.get_coordiantes(), columns=coord_columns, index=idxes_array1)
-        df2 = pd.DataFrame(self.cat2.get_coordiantes(), columns=coord_columns, index=idxes_array2)
+        df1 = pd.DataFrame(self.cat1.get_coordinates(), columns=coord_columns, index=idxes_array1)
+        df2 = pd.DataFrame(self.cat2.get_coordinates(), columns=coord_columns, index=idxes_array2)
         append_df1 = self.cat1.get_appending_data(retain_all_columns, retain_columns, invalid_key_error=False)
         append_df2 = self.cat2.get_appending_data(retain_all_columns, retain_columns, invalid_key_error=False)
         if len(append_df1.columns) > 0:

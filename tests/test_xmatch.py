@@ -60,7 +60,7 @@ def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_r
     return expected_idx, (centrals_np, neighbors_np)
 
 
-def check_Xmatching(expected_matches: dict, output_matches: defaultdict):
+def check_xmatch(expected_matches: dict, output_matches: defaultdict):
     """
     Compares the expected matching groups with the output matching groups to determine
     if the matching process has been conducted correctly.
@@ -104,7 +104,7 @@ def print_format_match(problematic_matches, central_point, surrounding_points):
         print(f"[X] {central_point_str}: [{surrounding_points_str}]")
 
 
-class TestCelestialXMatching_RandomGrid(unittest.TestCase):
+class TestCelestialXmatch_RandomGrid(unittest.TestCase):
     """
     A unittest class for verifying the functionality of a celestial object cross-matching algorithm.
 
@@ -139,7 +139,7 @@ class TestCelestialXMatching_RandomGrid(unittest.TestCase):
 
     def test_match_by_quadtree(self):
         output_matches = xmatch(self.two_catalogs[0], self.two_catalogs[1], self.tolerance).get_result_dict()
-        problematic_matches = check_Xmatching(self.expected_matching, output_matches)
+        problematic_matches = check_xmatch(self.expected_matching, output_matches)
         print_format_match(problematic_matches, self.two_catalogs[0], self.two_catalogs[1])
         self.assertEqual(len(problematic_matches), 0, f"Failed groups: {problematic_matches}")
 
@@ -250,10 +250,10 @@ class TestInputFormatXMatch(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialXMatching_RandomGrid)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialXmatch_RandomGrid)
     unittest.TextTestRunner(verbosity=2).run(suite)
     for i in range(100):
-        ut = TestCelestialXMatching_RandomGrid()
+        ut = TestCelestialXmatch_RandomGrid()
         ut.setUp()
         ut.test_match_by_quadtree()
         print(f"Test {i+1} passed!")

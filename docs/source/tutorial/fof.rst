@@ -36,7 +36,7 @@ The result object contains the clustering results. Four methods are available to
 get_group_dataframe()
 ---------------------
 
-To get the clustering results with the appendind data (``'mag'`` in this case), use the
+To get the clustering results with the appending data (``'mag'`` in this case), use the
 :func:`spherimatch.FoFResult.get_group_dataframe` method:
 
 .. code-block:: python
@@ -94,8 +94,8 @@ Expected output::
 Each group is also a pandas DataFrame.
 
 .. note::
-    The iterater from ``groupby()`` is extremely slow for large datasets. The current solution is to flatten the
-    DataFrame into a single layer of index and manupulate the index directly, or even turn the DataFrame into a numpy array.
+    The iterator from ``groupby()`` is extremely slow for large datasets. The current solution is to flatten the
+    DataFrame into a single layer of index and manipulates the index directly, or even turn the DataFrame into a numpy array.
 
 If you want DataFrame with a single layer of index and the size of each group as a column, you can use the following code:
 

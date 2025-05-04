@@ -18,7 +18,7 @@ class FoFResult:
         list[list[tuple]]
             A list of lists of tuples of coordinates of objects in each group.
         """
-        objects_coordinates = self.catalog.get_coordiantes()
+        objects_coordinates = self.catalog.get_coordinates()
         return [[tuple(objects_coordinates[i, :]) for i in g] for g in self.result_list]
 
     def get_group_coordinates(self) -> list[tuple]:
@@ -29,7 +29,7 @@ class FoFResult:
         list[tuple]
             A list of tuples of coordinates of the center of each group.
         """
-        objects_coordinates = self.catalog.get_coordiantes()
+        objects_coordinates = self.catalog.get_coordinates()
         # [FIXME] This return a list of NDArrays, not a list of tuples.
         return [np.average(objects_coordinates[g, :], axis=0) for g in self.result_list]
 
@@ -73,7 +73,7 @@ class FoFResult:
                 new_index_tuples.append((group_index, object_index))
                 original_indices.append(object_index)
 
-        data_df = pd.DataFrame(self.catalog.get_coordiantes(), columns=coord_columns, index=self.catalog.get_indexes())
+        data_df = pd.DataFrame(self.catalog.get_coordinates(), columns=coord_columns, index=self.catalog.get_indexes())
         append_df = self.catalog.get_appending_data(retain_all_columns, retain_columns)
         if len(append_df.columns) > 0:
             data_df = pd.concat([data_df, append_df], axis=1)

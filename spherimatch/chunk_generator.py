@@ -26,20 +26,20 @@ class ChunkGenerator:
         chunks : list[Chunk]
             List of chunks with data.
         '''
-        coordiantes = catalog.get_coordiantes()
+        coordinates = catalog.get_coordinates()
         indexes = catalog.get_indexes()
-        ra, dec = coordiantes[:, 0], coordiantes[:, 1]
+        ra, dec = coordinates[:, 0], coordinates[:, 1]
 
         # Get chunk ids for central coordinates
         central_chunk_ids = self.coor2id_central(ra, dec)
         for i in range(len(self.chunks)):
             mask = central_chunk_ids == i
-            self.chunks[i].add_central_data(coordiantes[mask], indexes[mask])
+            self.chunks[i].add_central_data(coordinates[mask], indexes[mask])
 
         # Get chunk ids for boundary coordinates
         boundary_chunk_indices = self.coor2id_boundary(ra, dec)
         for boundary_chunk_id, indices in enumerate(boundary_chunk_indices):  # May be a bug here
-            self.chunks[boundary_chunk_id].add_boundary_data(coordiantes[indices], indexes[indices])
+            self.chunks[boundary_chunk_id].add_boundary_data(coordinates[indices], indexes[indices])
 
         return self.chunks
 

@@ -15,7 +15,7 @@ from .utilities_spherical import (
 )
 
 
-def unique_merge_defaultdicts(d1: defaultdict, d2: defaultdict):
+def unique_merge_defaultdict(d1: defaultdict, d2: defaultdict):
     """Joins two dictionaries, merging values for shared keys and preserving others.
 
     When both dictionaries have the same key, this function makes a new list
@@ -35,7 +35,7 @@ def unique_merge_defaultdicts(d1: defaultdict, d2: defaultdict):
         A dictionary with all keys from both d1 and d2. For shared keys, it has a list
         of unique values. For unshared keys, it has the original list.
     """
-    # Convert defaultdicts to arrays
+    # Convert defaultdict to arrays
     keys1 = np.array(list(d1.keys()), dtype=np.int64)
     keys2 = np.array(list(d2.keys()), dtype=np.int64)
     # Find intersection and unique keys in both arrays
@@ -96,7 +96,7 @@ def xmatch(catalog1, catalog2, tolerance, verbose=False) -> XMatchResult:
         if i == 0:
             merged_dict = dd
         else:
-            merged_dict = unique_merge_defaultdicts(merged_dict, dd)
+            merged_dict = unique_merge_defaultdict(merged_dict, dd)
     return XMatchResult(_catalog1, _catalog2, tolerance, merged_dict)
 
 
@@ -120,18 +120,18 @@ def xmatch_chunk(args: tuple[Chunk, Chunk, float]):
     ra, dec = chunk1.get_center()
     rot_coor1 = np.array(rotate_to_center(objects1, ra, dec)).T
     rot_coor2 = np.array(rotate_to_center(objects2, ra, dec)).T
-    if chunk1.farest_distance() != chunk2.farest_distance():
-        raise ValueError("The two chunks have different farest distances!")
-    SAFTY_FACTOR = 1.01
-    A2E_factor = (1 + compute_error(chunk1.farest_distance(), tolerance)) * SAFTY_FACTOR
-    idx1, idxes2 = spherical_xmatching(index1, rot_coor1, index2, rot_coor2, tolerance, A2E_factor)
+    if chunk1.farthest_distance() != chunk2.farthest_distance():
+        raise ValueError("The two chunks have different farthest distances!")
+    SAFETY_FACTOR = 1.01
+    A2E_factor = (1 + compute_error(chunk1.farthest_distance(), tolerance)) * SAFETY_FACTOR
+    idx1, idxes2 = spherical_xmatch(index1, rot_coor1, index2, rot_coor2, tolerance, A2E_factor)
     dd = defaultdict(list)
     for key, value in zip(idx1, idxes2):
         dd[key] = value
     return dd
 
 
-def spherical_xmatching(idx1: np.array, coor1: np.array, idx2: np.array, coor2: np.array, tolerance, A2E_factor):
+def spherical_xmatch(idx1: np.array, coor1: np.array, idx2: np.array, coor2: np.array, tolerance, A2E_factor):
     qt1 = KDTree(coor1)
     qt2 = KDTree(coor2)
     list_of_indexes = qt1.query_ball_tree(qt2, tolerance * A2E_factor)  # list of elements in idx2

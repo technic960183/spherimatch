@@ -104,7 +104,7 @@ class GridChunkGenerator(ChunkGenerator):
         chunk_id = 0
         for config in self.get_all_config():
             chunk = Chunk(chunk_id, config['center_ra'], config['center_dec'])
-            chunk.farest_distance(distance=config.get_max_radius())
+            chunk.farthest_distance(distance=config.get_max_radius())
             self.chunks.append(chunk)
             chunk_id += 1
 

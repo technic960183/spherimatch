@@ -13,7 +13,7 @@ class Catalog:
         The input data can be either a numpy array or a pandas dataframe.
 
         * np.array: The array must have a shape of (N, 2), representing N points with
-          two values: [ra (azimuth, longitude), dec (alltitude, latitude)].
+          two values: [ra (azimuth, longitude), dec (altitude, latitude)].
         * pd.DataFrame: The dataframe must have two columns named 'Ra' and 'Dec' (or all the
           possible combinations with 'ra', 'dec'; 'RA', 'DEC').
     '''
@@ -22,7 +22,7 @@ class Catalog:
         self.datatype = type(data)
         self.input_data = data
         self.ra = None  # ra, longitude, azimuth
-        self.dec = None  # dec, latitude, alltitude
+        self.dec = None  # dec, latitude, altitude
         self.ra_column: Optional[str] = None
         self.dec_column: Optional[str] = None
         if isinstance(self.input_data, np.ndarray):
@@ -52,7 +52,7 @@ class Catalog:
         if len(self.ra) != len(self.dec):
             raise ValueError("The length of Ra and Dec must be the same!")
 
-    def get_coordiantes(self) -> NDArray[np.float64]:
+    def get_coordinates(self) -> NDArray[np.float64]:
         '''Get the coordinate of the points in the catalog for xmatch and fof.
 
         Returns

@@ -57,7 +57,7 @@ properties of your catalog. The ``'dup_num'`` column shows the number of duplica
 
 .. note::
     When there are two 'unique' objects that are very close to each other, it is possible that they will be grouped together.
-    In an exetrema case, it is possible that a chain of unique objects will be grouped together, linking by their duplicates.
+    In an extreme case, it is possible that a chain of unique objects will be grouped together, linking by their duplicates.
     But this is rare for most catalogs. To solve this problem, you can try to decrease the tolerance value. However, if
     decreasing the tolerance value separates objects that should be considered as duplicates, this package does not provide
     a solution for now. You may need to remove the duplicates manually for those close objects.

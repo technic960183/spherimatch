@@ -73,11 +73,11 @@ def group_by_quadtree_chunk(args: tuple[Chunk, float]):
     normal_ra, normal_dec = cartesian_to_radec(normal_car)
     angle = great_circle_distance(ra, dec, 180, 0)
     rot_ra, rot_dec = rotate_radec_about_axis(objects[:, 0], objects[:, 1], normal_ra, normal_dec, angle)
-    corrdinates_np = np.vstack((rot_ra, rot_dec)).T
+    coordinates_np = np.vstack((rot_ra, rot_dec)).T
     index_np = chunk.get_index()
-    SAFTY_FACTOR = 1.05
-    A2E_factor = (1 + compute_error(chunk.farest_distance(), tolerance)) * SAFTY_FACTOR
-    groups_index = spherical_quadtree_grouping(index_np, corrdinates_np, tolerance, A2E_factor)
+    SAFETY_FACTOR = 1.05
+    A2E_factor = (1 + compute_error(chunk.farthest_distance(), tolerance)) * SAFETY_FACTOR
+    groups_index = spherical_quadtree_grouping(index_np, coordinates_np, tolerance, A2E_factor)
     return groups_index
 
 

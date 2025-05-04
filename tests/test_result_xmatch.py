@@ -42,7 +42,7 @@ class TestXMatchResult_Methods(unittest.TestCase):
 
     def test_get_dataframe1(self):
         result = xmatch(self.coords1, self.coords2, 2)
-        columns = ['Ra', 'Deccc']
+        columns = ['Ra', 'DE']
         df = result.get_dataframe1(coord_columns=columns)
         self.assertEqual(len(df), self.coords1.shape[0])
         self.assertListEqual(list(df.columns), columns + ['N_match'])
@@ -97,7 +97,7 @@ class TestXMatchResult_Methods(unittest.TestCase):
 
     def test_get_dataframe2(self):
         result = xmatch(self.coords1, self.coords2, 2)
-        columns = ['Ra', 'Deccc']
+        columns = ['Ra', 'DE']
         df = result.get_dataframe2(coord_columns=columns)
         self.assertEqual(len(df), self.coords2.shape[0])
         self.assertListEqual(list(df.columns), columns + ['N_match'])
@@ -109,7 +109,7 @@ class TestXMatchResult_Methods(unittest.TestCase):
 
     def test_get_serial_dataframe(self):
         result = xmatch(self.coords1, self.coords2, 2)
-        columns = ['Ra', 'Deccc']
+        columns = ['Ra', 'DE']
         df = result.get_serial_dataframe(coord_columns=columns)
         self.assertEqual(len(df), self.coords1.shape[0] + self.coords2.shape[0] * self.n1)
         self.assertListEqual(list(df.columns), columns + ['N_match', 'is_cat1'])
@@ -128,7 +128,7 @@ class TestXMatchResult_Methods(unittest.TestCase):
 
     def test_get_serial_dataframe_reverse(self):
         result = xmatch(self.coords1, self.coords2, 2)
-        columns = ['Ra', 'Deccc']
+        columns = ['Ra', 'DE']
         df = result.get_serial_dataframe(coord_columns=columns, reverse=True)
         self.assertEqual(len(df), self.coords2.shape[0] + self.coords1.shape[0] * self.n2)
         self.assertListEqual(list(df.columns), columns + ['N_match', 'is_cat1'])
@@ -196,7 +196,7 @@ class TestXMatchResult_Methods(unittest.TestCase):
     # @unittest.skip("Future functionality")
     # def test_get_multiindex_dataframe(self):
     #     result = xmatch(self.coords1, self.coords2, 2)
-    #     columns = ['Ra', 'Deccc']
+    #     columns = ['Ra', 'DE']
     #     df = result.get_multiindex_dataframe(coord_columns=columns)
     #     self.assertEqual(len(df), self.coords1.shape[0] + self.coords2.shape[0] * self.n1)
     #     self.assertListEqual(list(df.columns), ['Catalog', 'Column'])
@@ -208,5 +208,5 @@ class TestXMatchResult_Methods(unittest.TestCase):
     #         group_df = df.loc[i]
     #         continue  # [TODO] Check the content of the group dataframe
 
-    # [FIXME] Write a test to check that if itterating over the deaultdict, the keys won't be in the correct order.
+    # [FIXME] Write a test to check that if iterating over the defaultdict, the keys won't be in the correct order.
     # Thus yielding an incorrect result of N_match.
