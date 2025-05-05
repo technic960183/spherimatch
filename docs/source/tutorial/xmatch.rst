@@ -23,7 +23,7 @@ xmatch()
 Then, we can perform the cross-matching with the tolerance of 0.01 degree using the :func:`spherimatch.xmatch` function.
 
 .. code-block:: python
-    
+
     from spherimatch import xmatch
     result_object = xmatch(catalogA, catalogB, tolerance=0.01)
 
@@ -39,7 +39,7 @@ To get the matching results of catalog A, use the :func:`spherimatch.XMatchResul
     print(result_object.get_dataframe1())
 
 Expected output::
-    
+
             Ra     Dec  N_match
     0   80.894  41.269        0
     1  120.689 -41.269        1

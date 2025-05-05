@@ -1,0 +1,35 @@
+DISABLE:
+  - RST
+  - REPOSITORY
+DISABLE_LINTERS:
+  - JSON_PRETTIER
+  - YAML_PRETTIER
+  - PYTHON_PYRIGHT
+DISABLE_ERRORS_LINTERS:
+  - COPYPASTE_JSCPD
+  - PYTHON_MYPY
+  - REPOSITORY_CHECKOV
+  - REPOSITORY_GRYPE
+  - REPOSITORY_SECRETLINT
+  - REPOSITORY_SYFT
+  - REPOSITORY_TRIVY_SBOM
+  - REPOSITORY_TRUFFLEHOG
+ENABLE_ERRORS_LINTERS:
+  - PYTHON_ISORT
+
+MARKDOWN_MARKDOWNLINT_ARGUMENTS: --disable MD041
+PYTHON_BLACK_ARGUMENTS: --skip-string-normalization --line-length 120
+PYTHON_PYLINT_ARGUMENTS: --enable I0021
+
+PRE_COMMANDS:
+
+  - command: cp requirements.txt /venvs/requirements.txt
+    cwd: workspace
+    continue_if_failed: false
+
+  # Install dependencies for `pylint`
+  - command: python3 -m pip install --no-cache-dir -r /venvs/requirements.txt
+    venv: pylint
+    continue_if_failed: false
+
+REPORTERS_MARKDOWN_TYPE: simple

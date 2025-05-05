@@ -4,6 +4,7 @@ import pandas as pd
 from spherimatch.catalog import Catalog
 from spherimatch.utilities_spherical import generate_random_point
 
+
 class TestCatalog_RandomCheckInputOutput(unittest.TestCase):
 
     @staticmethod
@@ -16,15 +17,16 @@ class TestCatalog_RandomCheckInputOutput(unittest.TestCase):
         for i in range(10):
             (ra, dec), expected_output = self.get_input_output_pair(N=1000)
             catalog = Catalog(np.vstack([ra, dec]).T)
-            code_output = catalog.get_coordiantes()
+            code_output = catalog.get_coordinates()
             self.assertEqual(code_output.tolist(), expected_output.tolist())
-    
+
     def test_random_pd(self):
         for i in range(10):
             (ra, dec), expected_output = self.get_input_output_pair(N=1000)
             catalog = Catalog(pd.DataFrame({'Ra': ra, 'Dec': dec}))
-            code_output = catalog.get_coordiantes()
+            code_output = catalog.get_coordinates()
             self.assertEqual(code_output.tolist(), expected_output.tolist())
+
 
 class TestCatalog_ValidInput(unittest.TestCase):
 
@@ -52,8 +54,9 @@ class TestCatalog_ValidInput(unittest.TestCase):
 
     def tearDown(self):
         catalog = Catalog(self.parameter)
-        code_output = catalog.get_coordiantes()
+        code_output = catalog.get_coordinates()
         self.assertEqual(code_output.tolist(), self.expected_output.tolist())
+
 
 class TestCatalog_InvalidInput(unittest.TestCase):
 
@@ -65,7 +68,7 @@ class TestCatalog_InvalidInput(unittest.TestCase):
         with self.assertRaises(ValueError):
             Catalog(np.array([1, 2, 3]))  # 1D array
 
-    def test_np_shape_2x3(self):        
+    def test_np_shape_2x3(self):
         with self.assertRaises(ValueError):
             Catalog(np.array([[1, 2, 3], [4, 5, 6]]))
 

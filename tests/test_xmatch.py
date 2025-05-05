@@ -1,10 +1,10 @@
-from collections import defaultdict
 import unittest
+from collections import defaultdict
 import numpy as np
 import pandas as pd
-from spherimatch import point_offset, generate_random_point
+from tests.test_fof import generate_celestial_grid
 from spherimatch import xmatch
-from .test_fof import generate_celestial_grid
+from spherimatch.utilities_spherical import point_offset
 
 
 def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_radius=(0, 1)):
@@ -38,7 +38,7 @@ def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_r
         seed = np.random.randint(0, 1e6)
     np.random.seed(seed)
     np.random.shuffle(grid)
-    selected_points = grid[:np.floor(len(grid)*fraction).astype(int)]
+    selected_points = grid[: np.floor(len(grid) * fraction).astype(int)]
 
     centrals = []
     neighbors = []
@@ -46,10 +46,10 @@ def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_r
     i_cat2 = 0
     for i, point in enumerate(selected_points):
         centrals.append(point)
-        idxes = [] # List of indexes of the surrounding points
+        idxes = []  # List of indexes of the surrounding points
         for _ in range(np.random.randint(5, 10)):  # Randomly create 1 to 4 additional points
             theta = np.random.uniform(0, 360)  # Random direction
-            distance = np.random.uniform(tolerance*ring_radius[0], tolerance*ring_radius[1]) # Random distance
+            distance = np.random.uniform(tolerance * ring_radius[0], tolerance * ring_radius[1])  # Random distance
             offset_point = point_offset(point, distance, theta)
             neighbors.append(offset_point)
             idxes.append(i_cat2)
@@ -60,21 +60,21 @@ def create_catalogs_from_grid(grid, tolerance=1, seed=None, fraction=0.5, ring_r
     return expected_idx, (centrals_np, neighbors_np)
 
 
-def check_Xmatching(expected_matches: dict, output_matches: defaultdict):
+def check_xmatch(expected_matches: dict, output_matches: defaultdict):
     """
     Compares the expected matching groups with the output matching groups to determine
     if the matching process has been conducted correctly.
 
     Parameters:
-    - expected_matches (dict): A dictionary where keys are central points and values are lists of expected 
+    - expected_matches (dict): A dictionary where keys are central points and values are lists of expected
                                neighboring points that should match with the central point.
-    - output_matches (defaultdict): A defaultdict similar in structure to expected_matches, but contains 
-                                    the actual neighboring points matched with each central point by the 
+    - output_matches (defaultdict): A defaultdict similar in structure to expected_matches, but contains
+                                    the actual neighboring points matched with each central point by the
                                     matching algorithm being tested.
 
     Returns:
-    - problematic_matches (list): A list of tuples, where each tuple contains a central point and its expected 
-                                  neighboring points that were not matched correctly by the matching algorithm. 
+    - problematic_matches (list): A list of tuples, where each tuple contains a central point and its expected
+                                  neighboring points that were not matched correctly by the matching algorithm.
                                   If the algorithm works correctly, this list will be empty.
     """
     problematic_matches = []
@@ -94,6 +94,7 @@ def check_Xmatching(expected_matches: dict, output_matches: defaultdict):
             print(f"Group {central} does not match!")
     return problematic_matches
 
+
 def print_format_match(problematic_matches, central_point, surrounding_points):
     for match in problematic_matches:
         p = central_point[match[0]]
@@ -103,7 +104,7 @@ def print_format_match(problematic_matches, central_point, surrounding_points):
         print(f"[X] {central_point_str}: [{surrounding_points_str}]")
 
 
-class TestCelestialXMatching_RandomGrid(unittest.TestCase):
+class TestCelestialXmatch_RandomGrid(unittest.TestCase):
     """
     A unittest class for verifying the functionality of a celestial object cross-matching algorithm.
 
@@ -122,6 +123,7 @@ class TestCelestialXMatching_RandomGrid(unittest.TestCase):
                                        the central points, and the second contains points surrounding the
                                        central points.
     """
+
     def setUp(self):
         # This method will be called before each test, setting up the common resources
         seed = np.random.randint(0, 1e5)
@@ -133,11 +135,11 @@ class TestCelestialXMatching_RandomGrid(unittest.TestCase):
             grid, self.tolerance, seed=seed, ring_radius=(0.999, 1.0), fraction=0.8)
         if panda:
             self.two_catalogs = (pd.DataFrame(self.two_catalogs[0], columns=['Ra', 'Dec']),
-                                    pd.DataFrame(self.two_catalogs[1], columns=['Ra', 'Dec']))
+                                 pd.DataFrame(self.two_catalogs[1], columns=['Ra', 'Dec']))
 
     def test_match_by_quadtree(self):
         output_matches = xmatch(self.two_catalogs[0], self.two_catalogs[1], self.tolerance).get_result_dict()
-        problematic_matches = check_Xmatching(self.expected_matching, output_matches)
+        problematic_matches = check_xmatch(self.expected_matching, output_matches)
         print_format_match(problematic_matches, self.two_catalogs[0], self.two_catalogs[1])
         self.assertEqual(len(problematic_matches), 0, f"Failed groups: {problematic_matches}")
 
@@ -204,8 +206,8 @@ class TestInputFormatXMatch(unittest.TestCase):
 
     def test_with_numpy(self):
         # Test with numpy arrays
-        df1 = np.array([[1, 3], [2, 4], [8, 6]]) # shape (3, 2)
-        df2 = np.array([[5, 7], [6, 8], [7, 9]]) # shape (3, 2)
+        df1 = np.array([[1, 3], [2, 4], [8, 6]])  # shape (3, 2)
+        df2 = np.array([[5, 7], [6, 8], [7, 9]])  # shape (3, 2)
         self.result = xmatch(df1, df2, self.tolerance)
         self.assertIsNotNone(self.result)  # Assert result is not None
 
@@ -248,10 +250,10 @@ class TestInputFormatXMatch(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialXMatching_RandomGrid)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialXmatch_RandomGrid)
     unittest.TextTestRunner(verbosity=2).run(suite)
     for i in range(100):
-        ut = TestCelestialXMatching_RandomGrid()
+        ut = TestCelestialXmatch_RandomGrid()
         ut.setUp()
         ut.test_match_by_quadtree()
         print(f"Test {i+1} passed!")

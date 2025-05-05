@@ -1,9 +1,11 @@
 import unittest
 import numpy as np
 from numpy.typing import NDArray
-from spherimatch import point_offset, generate_random_point
-# from spherimatch import group_by_disjoint_set, group_by_DFS
 from spherimatch import fof
+from spherimatch.utilities_spherical import point_offset
+
+# from spherimatch.utilities_spherical import generate_random_point
+# from spherimatch import group_by_disjoint_set, group_by_DFS
 
 
 def generate_celestial_grid(**kwargs) -> list[tuple[float, float]]:
@@ -54,12 +56,12 @@ def generate_celestial_grid(**kwargs) -> list[tuple[float, float]]:
     return grid
 
 
-def create_groups_from_grid(grid: list[tuple[float, float]], 
-                            tolerance=1, seed=None, fraction=0.5, 
-                            ring_radius=(0, 1)) -> tuple[list[list[tuple[float, float]]], NDArray]:
+def create_groups_from_grid(
+    grid: list[tuple[float, float]], tolerance=1.0, seed=None, fraction=0.5, ring_radius=(0, 1)
+) -> tuple[list[list[tuple[float, float]]], NDArray]:
     """
     Randomly pick half of the grid points and create groups around them.
-    For each selected grid point, use the point_offset() function to create several points 
+    For each selected grid point, use the point_offset() function to create several points
     within a tolerance (default 1 degree) circle around the central point.
     Returns a list of groups, where each group is a list of (RA, Dec) coordinates.
     """
@@ -67,7 +69,7 @@ def create_groups_from_grid(grid: list[tuple[float, float]],
         seed = np.random.randint(0, 1e6)
     np.random.seed(seed)
     np.random.shuffle(grid)
-    selected_points = grid[:np.floor(len(grid)*fraction).astype(int)]
+    selected_points = grid[: np.floor(len(grid) * fraction).astype(int)]
 
     groups = []
     for point in selected_points:
@@ -75,8 +77,8 @@ def create_groups_from_grid(grid: list[tuple[float, float]],
         for _ in range(np.random.randint(1, 5)):  # Randomly create 1 to 4 additional points
             theta = np.random.uniform(0, 360)  # Random direction
             offset_point = point_offset(
-                point, np.random.uniform(tolerance*ring_radius[0], tolerance*ring_radius[1]),
-                theta)  # Random distance within 1 deg (tolerance)
+                point, np.random.uniform(tolerance * ring_radius[0], tolerance * ring_radius[1]), theta
+            )  # Random distance within 1 deg (tolerance)
             group.append(offset_point)
         groups.append(group)
     all_points = np.array([point for group in groups for point in group[0:]])
@@ -92,7 +94,7 @@ def check_group_match(expected_groups: list[list[tuple[float, float]]], output_g
         List of groups that are expected to be grouped correctly.
     output_groups : list[list[tuple[float, float]]]
         List of groups that are output by the tested function.
-    
+
     Returns
     -------
     problematic_groups : list[list[tuple[float, float]]]
@@ -116,11 +118,11 @@ class TestCelestialGrouping_RandomGrid(unittest.TestCase):
     """
     Unit test for a celestial objects grouping method.
 
-    The purpose of this unit test is to ensure that a celestial objects grouping method works correctly. 
-    A grid on the celestial sphere is created with a size of 10 deg. Half of the grid points are randomly 
-    selected, and for each selected point, several points are created within a 1 deg circle around it using 
-    the point_offset() function. These points, with the central point, become a 'group'. The tested function 
-    is then called, and its output is checked against the expected groups. If there's a discrepancy, the 
+    The purpose of this unit test is to ensure that a celestial objects grouping method works correctly.
+    A grid on the celestial sphere is created with a size of 10 deg. Half of the grid points are randomly
+    selected, and for each selected point, several points are created within a 1 deg circle around it using
+    the point_offset() function. These points, with the central point, become a 'group'. The tested function
+    is then called, and its output is checked against the expected groups. If there's a discrepancy, the
     problematic group is printed.
     """
 
@@ -150,7 +152,7 @@ class TestCelestialGrouping_RandomGrid(unittest.TestCase):
         self.assertEqual(len(problematic_groups), 0, f"Failed groups: {problematic_groups}")
 
 
-class TestCelestialGrouping_Random(unittest.TestCase):
+# class TestCelestialGrouping_Random(unittest.TestCase):
 
     # def test_comparing_DFS_quadtree(self):
     #     ra, dec = generate_random_point(10000)
@@ -161,22 +163,23 @@ class TestCelestialGrouping_Random(unittest.TestCase):
     #     problematic_groups = check_group_match(output_groups_dfs, output_groups_qt)
     #     self.assertEqual(len(problematic_groups), 0, f"Failed groups: {problematic_groups}")
 
-    @unittest.skip("This test takes too long to run.")
-    def test_comparing_chunk_setting(self):
-        ra, dec = generate_random_point(10000, seed=0)
-        all_points = np.array([ra, dec]).T
-        tolerance = 1.5
-        output_groups_base = fof(all_points, tolerance, dec_bound=60, ring_chunk=[6, 6]).get_coordinates()
-        for i in range(400):
-            print(f"Test {i+1} started!")
-            dec = np.random.uniform(50, 80)
-            N = np.random.randint(2, 6)
-            ring = [np.random.randint(6, 12) for _ in range(N)]
-            output_groups_test = fof(all_points, tolerance, dec_bound=dec, ring_chunk=ring).get_coordinates()
-            problematic_groups = check_group_match(output_groups_test, output_groups_base)
-            self.assertEqual(
-                len(problematic_groups),
-                0, f"Failed groups: {problematic_groups} with dec_bound={dec}, ring_chunk={ring}")
+    # [TODO] This test has not been updated to the new API yet.
+    # @unittest.skip("This test takes too long to run.")
+    # def test_comparing_chunk_setting(self):
+    #     ra, dec = generate_random_point(10000, seed=0)
+    #     all_points = np.array([ra, dec]).T
+    #     tolerance = 1.5
+    #     output_groups_base = fof(all_points, tolerance, dec_bound=60, ring_chunk=[6, 6]).get_coordinates()
+    #     for i in range(400):
+    #         print(f"Test {i+1} started!")
+    #         dec = np.random.uniform(50, 80)
+    #         N = np.random.randint(2, 6)
+    #         ring = [np.random.randint(6, 12) for _ in range(N)]
+    #         output_groups_test = fof(all_points, tolerance, dec_bound=dec, ring_chunk=ring).get_coordinates()
+    #         problematic_groups = check_group_match(output_groups_test, output_groups_base)
+    #         self.assertEqual(
+    #             len(problematic_groups),
+    #             0, f"Failed groups: {problematic_groups} with dec_bound={dec}, ring_chunk={ring}")
 
 
 class TestCelestialGrouping(unittest.TestCase):
@@ -208,7 +211,9 @@ class TestCelestialGrouping(unittest.TestCase):
         tolerance = 2
         all_points = np.array(grid)
         output_groups = fof(all_points, tolerance).get_coordinates()
-        self.assertEqual(len(output_groups), (dec_range//5)*2+1, f"Number of groups obtained: {len(output_groups)}")
+        self.assertEqual(
+            len(output_groups), (dec_range // 5) * 2 + 1, f"Number of groups obtained: {len(output_groups)}"
+        )
 
     def test_qt_random_walk(self):
         ra_now = np.random.uniform(0, 360)
@@ -229,7 +234,7 @@ class TestCelestialGrouping(unittest.TestCase):
         point_now = (ra_now, dec_now)
         all_points = [point_now]
         for _ in range(1000):
-            node = all_points[np.random.randint(0, len(all_points))]
+            node = all_points[np.random.randint(0, len(all_points))]  # pylint: disable=invalid-sequence-index
             point_now = point_offset(node, np.random.uniform(0, 1), np.random.uniform(0, 360))
             all_points.append(point_now)
         all_points = np.array(all_points)
@@ -248,12 +253,12 @@ def print_format_group(groups):
         print(f"[X] {central_point_str}: [{surrounding_points_str}]")
 
 
-if __name__ == "__main__":
-    # unittest.main(verbosity=2)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialGrouping_Random)
-    unittest.TextTestRunner(verbosity=2).run(suite)
-    for i in range(0):
-        ut = TestCelestialGrouping_RandomGrid()
-        ut.setUp()
-        ut.test_group_by_quadtree()
-        print(f"Test {i+1} passed!")
+# if __name__ == "__main__":
+#     # unittest.main(verbosity=2)
+#     suite = unittest.TestLoader().loadTestsFromTestCase(TestCelestialGrouping_Random)
+#     unittest.TextTestRunner(verbosity=2).run(suite)
+#     for i in range(0):
+#         ut = TestCelestialGrouping_RandomGrid()
+#         ut.setUp()
+#         ut.test_group_by_quadtree()
+#         print(f"Test {i+1} passed!")

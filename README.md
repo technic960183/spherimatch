@@ -59,6 +59,6 @@ To cite spherimatch in your publication, please use the following BibTeX entry:
   note = {Accessed: YYYY-MM}
 }
 ```
-Addtionally, you may add a reference to `https://github.com/technic960183/spherimatch` in the footnote if suitable.
+Additionally, you may add a reference to `https://github.com/technic960183/spherimatch` in the footnote if suitable.
 
 If you publish a paper that uses `spherimatch`, please let me know. I would be happy to know how this package has been used in research.

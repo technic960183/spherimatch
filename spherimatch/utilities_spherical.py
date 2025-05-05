@@ -31,7 +31,7 @@ def distances_to_target(target, points):
     # Haversine formula
     delta_ra = points_rad[:, 0] - target_rad[0]
     delta_dec = points_rad[:, 1] - target_rad[1]
-    a = np.sin(delta_dec/2.0)**2 + np.cos(target_rad[1]) * np.cos(points_rad[:, 1]) * np.sin(delta_ra/2.0)**2
+    a = np.sin(delta_dec / 2.0) ** 2 + np.cos(target_rad[1]) * np.cos(points_rad[:, 1]) * np.sin(delta_ra / 2.0) ** 2
     distances = 2 * np.arcsin(np.sqrt(a))
 
     # Convert back to degrees
@@ -72,17 +72,18 @@ def point_offset(ra_dec, angular_distance, theta):
     angular_distance : float
         Distance in degrees to move from the initial point.
     theta : float
-        Direction in degrees counter-clockwise from the positive DEC axis when viewed from the center of the celestial sphere.
+        Direction in degrees counter-clockwise from the positive DEC axis when viewed from the center of the
+        celestial sphere.
 
     Returns
     -------
     new_point : tuple
         (RA, DEC) in degrees for the point after offset.
-    
+
     Note
     ----
-    The direction specified by theta is counter-clockwise when viewed from the center of the celestial sphere, looking outwards.
-    If visualizing from a point above the North Celestial Pole, the direction will appear clockwise.
+    The direction specified by theta is counter-clockwise when viewed from the center of the celestial sphere,
+    looking outwards. If visualizing from a point above the North Celestial Pole, the direction will appear clockwise.
     """
 
     # Convert all angles to radians
@@ -173,8 +174,8 @@ def rodrigues_rotation(v, k, theta):
 def rotate_radec_about_axis(ra, dec, axis_ra, axis_dec, theta):
     """Rotate a point (or points) in celestial coordinates about a specified axis.
 
-    Given a point (or an array of points) defined by its Right Ascension and Declination, 
-    this function rotates it about an arbitrary axis (defined by its own RA and Dec) by a 
+    Given a point (or an array of points) defined by its Right Ascension and Declination,
+    this function rotates it about an arbitrary axis (defined by its own RA and Dec) by a
     specified angle.
 
     Parameters

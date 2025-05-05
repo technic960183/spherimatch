@@ -1,13 +1,13 @@
 import unittest
 import numpy as np
 import pandas as pd
-from spherimatch import ChunkGeneratorByGrid
-from spherimatch import ChunkGeneratorByDenseGrid, ChunkGeneratorBySuperDenseGrid
-from spherimatch import GridChunkGenerator
-from spherimatch import DisjointSet
 from spherimatch.catalog import Catalog
-from spherimatch.result_fof import FoFResult 
+from spherimatch.chunk_generator_grid import ChunkGeneratorByGrid, GridChunkGenerator
+from spherimatch.disjoint_set import DisjointSet
 from spherimatch.fof import group_by_quadtree_chunk
+from spherimatch.result_fof import FoFResult
+
+# from spherimatch.chunk_generator_grid import ChunkGeneratorByDenseGrid, ChunkGeneratorBySuperDenseGrid
 
 
 class TestChunkGeneratorByGrid_coor2id_central(unittest.TestCase):
@@ -68,6 +68,7 @@ class TestChunkGeneratorByGrid_coor2id_boundary(unittest.TestCase):
         result = chunk_gen.coor2id_boundary(ra, dec)
         self.assertEqual(result, expected_result)
 
+
 class TestChunkIntegratingFoF(unittest.TestCase):
 
     def group_by_quadtree_scipy(self, objects_df: pd.DataFrame, tolerance, chunk_gen):
@@ -92,15 +93,15 @@ class TestChunkIntegratingFoF(unittest.TestCase):
 
     def test_different_chunk(self):
         tolerance = 0.01
-        cg_a = GridChunkGenerator(margin=2*tolerance)
+        cg_a = GridChunkGenerator(margin=2 * tolerance)
         cg_a.set_symmetric_ring_chunk(60, [6, 6])
-        cg_b = ChunkGeneratorByGrid(margin=2*tolerance)
+        cg_b = ChunkGeneratorByGrid(margin=2 * tolerance)
         result_a = self.group_by_quadtree_scipy(self.df_a, tolerance, cg_a)
         result_b = self.group_by_quadtree_scipy(self.df_b, tolerance, cg_b)
         print(len(result_a.get_coordinates()))
         print(len(result_b.get_coordinates()))
         self.assertEqual(len(result_a.get_coordinates()), len(result_b.get_coordinates()))
-        
+
 
 # Running the tests
 if __name__ == '__main__':
