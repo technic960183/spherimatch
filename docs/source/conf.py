@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'spherimatch'
-copyright = '2024, Yuan-Ming Hsu'
+copyright = '2023-2025, Yuan-Ming Hsu'
 author = 'Yuan-Ming Hsu'
 release = 'v0.0'
 
