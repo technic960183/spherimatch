@@ -42,7 +42,7 @@ Before you start, please check out our documentation for a
   [duplicate removal example](https://technic960183.github.io/spherimatch/tutorial/duplicates_removal.html).
 
 ## API Reference
-The full documentation and API reference can be found [here](https://technic960183.github.io/spherimatch/index.html).
+The API reference can be found in the [full documentation](https://technic960183.github.io/spherimatch/index.html).
 
 ## Contributing
 If you find any bugs or potential issues, please report it directly to me (via Slack or E-mail), or start an [issue](https://github.com/technic960183/spherimatch/issues).
