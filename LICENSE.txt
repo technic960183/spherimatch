@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2023-2024 Yuan-Ming Hsu
+Copyright (c) 2023-2025 Yuan-Ming Hsu
 All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
