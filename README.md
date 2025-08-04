@@ -1,4 +1,7 @@
 # spherimatch
+[![ascl:2507.022](https://img.shields.io/badge/ascl-2507.022-blue.svg?colorB=262255)](https://ascl.net/2507.022)
+[![2025ascl.soft07022H](https://img.shields.io/badge/ADS-2025ascl.soft07022H-blue.svg)](https://ui.adsabs.harvard.edu/abs/2025ascl.soft07022H/abstract)
+
 A Python package for cross-matching and self-matching in spherical coordinates.
 
 ## Table of Contents
@@ -47,18 +50,23 @@ If you find any bugs or potential issues, please report it directly to me (via S
 If you have any suggestions or feature requests, feel free to start an [issue](https://github.com/technic960183/spherimatch/issues).
 
 ## Citation
-If you find `spherimatch` useful in your research, please consider citing it. Currently, we do not plan to publish a method paper for this package in the year of 2024. However, you can still cite this repository directly.
+If you find `spherimatch` useful in your research, please consider citing it.
 
-To cite spherimatch in your publication, please use the following BibTeX entry:
+`spherimatch` is registered in the [Astrophysics Source Code Library (ASCL)](https://ascl.net/2507.022), and can be cited using its Bibcode: [`2025ascl.soft07022H`](https://ui.adsabs.harvard.edu/abs/2025ascl.soft07022H/abstract).
+
+Please feel free to use your preferred citation format. For convenience, here is a BibTeX entry:
 ```bibtex
-@misc{spherimatch,
-  author = {Yuan-Ming Hsu},
-  title = {spherimatch: A Python package for cross-matching and self-matching in spherical coordinates.},
-  year = {2024},
-  howpublished = {\url{https://github.com/technic960183/spherimatch}},
-  note = {Accessed: YYYY-MM}
+@software{2025ascl.soft07022H,
+       author = {{Hsu}, Yuan-Ming},
+        title = "{spherimatch: Cross-matching and self-matching in spherical coordinates}",
+ howpublished = {Astrophysics Source Code Library, record ascl:2507.022},
+         year = 2025,
+        month = jul,
+          eid = {ascl:2507.022},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2025ascl.soft07022H},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
 ```
-Additionally, you may add a reference to `https://github.com/technic960183/spherimatch` in the footnote if suitable.
+You may also include a reference to the GitHub repository `https://github.com/technic960183/spherimatch` in the footnote if appropriate.
 
-If you publish a paper that uses `spherimatch`, please let me know. I would be happy to know how this package has been used in research.
+If you publish a paper that uses `spherimatch`, feel free to let me know. I would be happy to hear how this package supports your work!
